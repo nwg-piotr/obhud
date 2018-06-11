@@ -22,7 +22,7 @@ You can either assign commands to keys with [obkey](https://code.google.com/arch
 
 ![obkey](http://nwg.pl/obhud/images/obkey1.png)
 
-or just paste [this XML](https://gist.github.com/nwg-piotr/fc2c26c01869f22f85e0bbd6a68406dd) 
+or just paste [this XML](https://gist.github.com/nwg-piotr/d357206b3779362797e9c43879f38615) 
 into the `<keyboard></keyboard>` section of your `rc.xml` file.
 
 To make use of the battery-related commands, enter them in the 

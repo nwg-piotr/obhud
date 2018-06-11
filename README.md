@@ -63,7 +63,24 @@ graphical notification.
 
 ### obltk --battery low
 
+Displays graphical notification (10 seconds long), then suspends 
+the system with `systemctl suspend`.
+
+![battery-low](http://nwg.pl/obhud/images/battery-low.png)
+
 ### obltk --battery full
+
+Displays graphical notification.
+
+### obltk --ac connected
+
+Displays graphical notification:
+
+![ac-connected](http://nwg.pl/obhud/images/ac-connected.png)
+
+### obltk --ac disconnected
+
+Displays graphical notification.
 
 ## Installation
 Since the script is just the first stage of development a more

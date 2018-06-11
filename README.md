@@ -1,7 +1,7 @@
 # Openbox HUD
 
 This script is intended to simplify assigning 
-laptop-specific keys and events to actions and display slightly gnomish
+laptop-specific keys and events to actions and display ~~slightly gnomish~~
 graphical messages in [Openbox](http://openbox.org) window manager. 
 This way one can, for instance, change volume level or screen brightness 
 and see a graphical confirmation by just binding a key to a single 

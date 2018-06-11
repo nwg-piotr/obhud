@@ -9,7 +9,7 @@ command. Furthermore - assigning a command in [Tint2](https://gitlab.com/o9000/t
 preferences allows to see alerts concerning the AC and
 battery state, and also suspend on critical battery level.
 
-![preview](http://nwg.pl/obhud/images/preview.png)
+![preview](http://nwg.pl/obhud/images/preview1.png)
 
 ## Usage
 ````

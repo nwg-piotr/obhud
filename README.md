@@ -18,11 +18,11 @@ obltk --brightness {up} | {down}
 obltk --battery {low} | {full}
 obltk --ac {connected} | {disconnected}
 ````
-You can either assign commands to keys with [obkey](https://code.google.com/archive/p/obkey)
+You can either assign commands to keys with [obkey](https://code.google.com/archive/p/obkey)...
 
 ![obkey](http://nwg.pl/obhud/images/obkey1.png)
 
-or just paste [this XML](https://gist.github.com/nwg-piotr/d357206b3779362797e9c43879f38615) 
+...or just paste [this XML](https://gist.github.com/nwg-piotr/d357206b3779362797e9c43879f38615) 
 into the `<keyboard></keyboard>` section of your `rc.xml` file.
 
 To make use of the battery-related commands, enter them in the 
@@ -48,6 +48,22 @@ graphical notification.
 
 Decreases volume with the `amixer set Master toggle` command, displays
 graphical notification.
+
+`obltk --brightness up`
+
+Increases brightness with the `xbacklight +10` command, displays
+graphical notification:
+
+![brightness](http://nwg.pl/obhud/images/brightness.png)
+
+`obltk --brightness down`
+
+Decreases brightness with the `xbacklight -10` command, displays
+graphical notification.
+
+`obltk --battery low`
+
+`obltk --battery full`
 
 ## Installation
 Since the script is just the first stage of development a more

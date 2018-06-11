@@ -1,7 +1,7 @@
 # Openbox HUD
 
 This script is intended to simplify assigning 
-laptop-specific keys and events to actions and display a GNOME-like
+laptop-specific keys and events to actions and display slightly gnomish
 graphical messages in [Openbox](http://openbox.org) window manager. 
 This way one can, for instance, change volume level or screen brightness 
 and see a graphical confirmation by just binding a key to a single 
@@ -83,24 +83,17 @@ Displays graphical notification:
 Displays graphical notification.
 
 ## Installation
-Since the script is just the first stage of development a more
-complex solution, packaging it seems to make no sense at the moment.
-You'll have to copy files manually, and also take care of 
-dependencies.
+The package has not yet been published on AUR, as the script needs
+some more testing. If you'd like to help, you can make a 
+package on your own, or download the latest version from [the dist
+folder](https://github.com/nwg-piotr/obhud/tree/master/dist).
 
-1. Create a folder in the location you want and place the `obltk.py` 
-and `commands.py` files in it.
-2. Create a launcher script, entering the location you selected:
-````
-#!/bin/sh
-exec python /PathTo/YourFolder/obltk.py "$@"
-````
-and save as `/usr/bin/obltk`. Make the file executable.
+### Packaging
+1. Make a folder somewhere in your ~/home, and place 
+the [PKGBUILD file](https://github.com/nwg-piotr/obhud/raw/master/dist/PKGBUILD) inside.
+2. In terminal enter the folder, execute the `makepkg` command.
 
-## Dependencies (Arch Linux)
-Make sure you have the following packages installed:
-- `python` *(3.6, not python2)*
-- `alsa-utils`
-- `xorg-xbacklight`
-- `libnotify`
-- `notify-osd`
+### Installing manually
+
+`sudo pacman -U obhud-0.0.1-5-x86_64.pkg.tar.xz`
+

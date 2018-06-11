@@ -6,7 +6,6 @@ from PIL import Image, ImageTk  # Dependencies!
 import values
 
 volume_get_level = 'amixer sget Master | grep \'Right:\' | awk -F\'[][]\' \'{ print $2 }\' > ~/tmp'
-print("volume_get_level = " + volume_get_level)
 volume_up = 'amixer set Master 10%+'
 volume_down = 'amixer set Master 10%-'
 volume_toggle = 'amixer set Master toggle'

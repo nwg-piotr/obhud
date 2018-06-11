@@ -20,7 +20,7 @@ obltk --ac {connected} | {disconnected}
 ````
 You can either assign commands to keys with [obkey](https://code.google.com/archive/p/obkey)
 
-![obkey](http://nwg.pl/obhud/images/obkey.png)
+![obkey](http://nwg.pl/obhud/images/obkey1.png)
 
 or just paste [this XML](https://gist.github.com/nwg-piotr/fc2c26c01869f22f85e0bbd6a68406dd) 
 into the `<keyboard></keyboard>` section of your `rc.xml` file.

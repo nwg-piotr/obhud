@@ -1,12 +1,12 @@
 # Maintainer: Piotr Miller <nwg.piotr@gmail.com>
 pkgname=('obhud')
 pkgver=0.0.1
-pkgrel=3
+pkgrel=4
 pkgdesc="Script for handling laptop-specific keys in Openbox"
 arch=('i686' 'x86_64')
 url="https://github.com/nwg-piotr/obhud"
 license=('gpl3')
-depends=('xorg-xbacklight' 'alsa-utils' 'python-pmw' 'python-pillow')
+depends=('xorg-xbacklight' 'xorg-xrandr' 'libxrandr' 'alsa-utils' 'python' 'python-pmw' 'python-pillow' 'python-psutil')
 source=("https://github.com/nwg-piotr/obhud/raw/master/dist/obhud-0.0.1.tar.gz"
 "https://github.com/nwg-piotr/obhud/raw/master/dist/obhud")
 

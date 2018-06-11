@@ -18,7 +18,7 @@ setup(
 
     long_description=open("README.txt").read(),
     install_requires=[
-          'xorg-xbacklight', 'alsa-utils', 'python-pmw','python-pillow',
+          'xorg-xbacklight', 'xorg-xrandr', 'libxrandr', 'alsa-utils', 'python', 'python-pmw', 'python-pillow', 'python-psutil',
       ],
     platforms=['any'],
 )

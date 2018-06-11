@@ -13,7 +13,7 @@ battery state, and also suspend on critical battery level.
 
 ## Usage
 ````
-obltk --volume {up} | {down} | {toggle} 
+obltk --volume {up} | {down} | {toggle}
 obltk --brightness {up} | {down}
 obltk --battery {low} | {full}
 obltk --ac {connected} | {disconnected}
@@ -29,6 +29,25 @@ To make use of the battery-related commands, enter them in the
 Tint2 preferences:
 
 ![tint2](http://nwg.pl/obhud/images/tint2.png)
+
+## Commands description
+
+`obltk --volume up`
+
+Increases volume with the `amixer set Master 10%+` command, displays
+graphical notification:
+
+![volume](http://nwg.pl/obhud/images/volume.png)
+
+`obltk --volume down`
+
+Decreases volume with the `amixer set Master 10%-` command, displays
+graphical notification.
+
+`obltk --volume toggle`
+
+Decreases volume with the `amixer set Master toggle` command, displays
+graphical notification.
 
 ## Installation
 Since the script is just the first stage of development a more

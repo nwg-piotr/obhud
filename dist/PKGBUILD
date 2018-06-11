@@ -1,7 +1,7 @@
 # Maintainer: Piotr Miller <nwg.piotr@gmail.com>
 pkgname=('obhud')
 pkgver=0.0.1
-pkgrel=1
+pkgrel=3
 pkgdesc="Script for handling laptop-specific keys in Openbox"
 arch=('i686' 'x86_64')
 url="https://github.com/nwg-piotr/obhud"
@@ -10,10 +10,8 @@ depends=('xorg-xbacklight' 'alsa-utils' 'python-pmw' 'python-pillow')
 source=("https://github.com/nwg-piotr/obhud/raw/master/dist/obhud-0.0.1.tar.gz"
 "https://github.com/nwg-piotr/obhud/raw/master/dist/obhud")
 
-md5sums=('062737633adadb5c1f22e53603f12730'
-         'af54e54383a7bdb5fa13ffa1c023f831'
-         '8c44865338673c7a9ff646d23af1b172'
-         '15b45413c215260baf7c462cbbdde183')
+md5sums=('49e40ef9eebfa7b1b68403b2f8ec7c80'
+         '5b26cb8e7fff160d1eccc183e8ae2d28')
 
 package() {
   install -D -m 755 obhud \

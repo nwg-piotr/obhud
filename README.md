@@ -28,7 +28,7 @@ into the `<keyboard></keyboard>` section of your `rc.xml` file.
 To make use of the battery-related commands, enter them in the 
 Tint2 preferences:
 
-![tint2](http://nwg.pl/obltk/images/tint2.png)
+![tint2](http://nwg.pl/obhud/images/tint2.png)
 
 ## Installation
 Since the script is just the first stage of development a more

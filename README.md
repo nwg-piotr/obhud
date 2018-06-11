@@ -32,38 +32,38 @@ Tint2 preferences:
 
 ## Commands description
 
-`obltk --volume up`
+### obltk --volume up
 
 Increases volume with the `amixer set Master 10%+` command, displays
 graphical notification:
 
 ![volume](http://nwg.pl/obhud/images/volume.png)
 
-`obltk --volume down`
+### obltk --volume down
 
 Decreases volume with the `amixer set Master 10%-` command, displays
 graphical notification.
 
-`obltk --volume toggle`
+### obltk --volume toggle
 
 Decreases volume with the `amixer set Master toggle` command, displays
 graphical notification.
 
-`obltk --brightness up`
+### obltk --brightness up
 
 Increases brightness with the `xbacklight +10` command, displays
 graphical notification:
 
 ![brightness](http://nwg.pl/obhud/images/brightness.png)
 
-`obltk --brightness down`
+### obltk --brightness down
 
 Decreases brightness with the `xbacklight -10` command, displays
 graphical notification.
 
-`obltk --battery low`
+### obltk --battery low
 
-`obltk --battery full`
+### obltk --battery full
 
 ## Installation
 Since the script is just the first stage of development a more

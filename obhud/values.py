@@ -6,3 +6,5 @@ hud_scale = None
 hud_margin_v = None
 
 hud_geometry = None
+
+tmp = ""

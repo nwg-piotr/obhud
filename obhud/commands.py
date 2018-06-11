@@ -5,13 +5,14 @@ from PIL import Image, ImageTk  # Dependencies!
 
 import values
 
-volume_get_level = 'amixer sget Master | grep \'Right:\' | awk -F\'[][]\' \'{ print $2 }\' > tmp'
+volume_get_level = 'amixer sget Master | grep \'Right:\' | awk -F\'[][]\' \'{ print $2 }\' > ~/tmp'
+print("volume_get_level = " + volume_get_level)
 volume_up = 'amixer set Master 10%+'
 volume_down = 'amixer set Master 10%-'
 volume_toggle = 'amixer set Master toggle'
-volume_get_status = 'amixer sget Master | grep \'Right:\' | awk -F\'[][]\' \'{ print $4 }\' > tmp'
+volume_get_status = 'amixer sget Master | grep \'Right:\' | awk -F\'[][]\' \'{ print $4 }\' > ~/tmp'
 
-brightness_get_level = 'xbacklight -get > tmp'
+brightness_get_level = 'xbacklight -get > ~/tmp'
 brightness_up = 'xbacklight +10'
 brightness_down = 'xbacklight -10'
 
@@ -54,8 +55,8 @@ def volume(command):
         os.system(volume_toggle)
 
     os.system(volume_get_level)
-    volume_lvl = open('tmp', 'r').read()
-    os.remove('tmp')
+    volume_lvl = open(values.tmp, 'r').read()
+    os.remove(values.tmp)
     volume_lvl = volume_lvl.split("%")[0]
 
     volume_int = int(round(float(volume_lvl.rstrip())))
@@ -74,9 +75,9 @@ def volume(command):
 
     else:
         os.system(volume_get_status)
-        volume_status = open('tmp', 'r').read()
+        volume_status = open(values.tmp, 'r').read()
         volume_status = volume_status.rstrip()
-        os.remove('tmp')
+        os.remove(values.tmp)
 
         if volume_status == "off":
             show_hud("volume-muted", "Muted", 1000)
@@ -101,8 +102,8 @@ def brightness(command):
         os.system(brightness_down)
 
     os.system(brightness_get_level)
-    brightness_lvl = open('tmp', 'r').read()
-    os.remove('tmp')
+    brightness_lvl = open(values.tmp, 'r').read()
+    os.remove(values.tmp)
 
     try:
         brightness_str = str(int(round(float(brightness_lvl.rstrip())))) + "%"
@@ -128,9 +129,9 @@ def ac(command):
 
 
 def measure_screen():
-    os.system('xrandr | grep \'*\' > tmp')
-    resolution_string = open('tmp', 'r').read()
-    os.remove('tmp')
+    os.system('xrandr | grep \'*\' > ~/tmp')
+    resolution_string = open(values.tmp, 'r').read()
+    os.remove(values.tmp)
 
     resolution = resolution_string.split()[0]
     width, height = resolution.split('x')

@@ -1,9 +1,14 @@
 import sys
+import os
+import values
 
 from commands import volume, brightness, battery, ac, check_dimensions
 
 
 def main():
+
+    values.tmp = os.getenv("HOME") + "/tmp".rstrip()
+    print(values.tmp)
 
     check_dimensions()
 

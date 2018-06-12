@@ -6,7 +6,7 @@ from PIL import Image, ImageTk  # Dependencies!
 import values
 
 volume_get_level = 'amixer sget Master | grep \'Right:\' | awk -F\'[][]\' \'{ print $2 }\' > ~/tmp'
-volume_up = 'amixer set Master 10%+'
+volume_up = 'amixer set Master 10%+ unmute'
 volume_down = 'amixer set Master 10%-'
 volume_toggle = 'amixer set Master toggle'
 volume_get_status = 'amixer sget Master | grep \'Right:\' | awk -F\'[][]\' \'{ print $4 }\' > ~/tmp'
@@ -104,12 +104,25 @@ def brightness(command):
     brightness_lvl = open(values.tmp, 'r').read()
     os.remove(values.tmp)
 
+    brightness_int = 0
     try:
-        brightness_str = str(int(round(float(brightness_lvl.rstrip())))) + "%"
+        brightness_int = int(round(float(brightness_lvl.rstrip())))
+        brightness_str = str(brightness_int) + "%"
     except ValueError:
         brightness_str = "xbacklight?"
 
-    show_hud("display-brightness", brightness_str, 1000)
+    if brightness_int == 100:
+        brightness_icon = "brightness-full"
+    elif brightness_int > 60:
+        brightness_icon = "brightness-high"
+    elif brightness_int >= 40:
+        brightness_icon = "brightness-medium"
+    elif brightness_int > 0:
+        brightness_icon = "brightness-low"
+    else:
+        brightness_icon = "brightness-medium"
+
+    show_hud(brightness_icon, brightness_str, 1000)
 
 
 def battery(command):

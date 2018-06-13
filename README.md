@@ -89,6 +89,22 @@ the [obhud](https://aur.archlinux.org/packages/obhud) package in AUR.
 Feel free to make packages for other Linux distributions. Just let me
 know for them to be linked here.
 
+## Configuration
+If you'd like to change default bash comands (e.g. to 
+increase/decrease volume/brightness by 5% instead of 10%), you can
+edit the ~/.config/obhud/obhud.conf file. Leave double `%%` as is.
+````buildoutcfg
+[Commands]
+# You can modify default commands in the ~/config/obhud/obhud.conf file.
+# In case you got lost, just delete it. It'll be re-created from
+# default /etc/obhud/obhud.conf file.
+volume_up = amixer set Master 10%%+ unmute -q
+volume_down = amixer set Master 10%%- -q
+volume_toggle = amixer set Master toggle -q
+brightness_up = xbacklight +10
+brightness_down = xbacklight -10
+```` 
+
 ## Credits
 I used icons from [numix-gtk-theme](https://www.archlinux.org/packages/community/any/numix-gtk-theme)
 by [Numix Project](http://numixproject.org) as the base of the icon set. Thanks!

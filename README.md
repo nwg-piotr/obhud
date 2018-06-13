@@ -34,8 +34,8 @@ Tint2 preferences:
 
 ### obltk --volume up
 
-Increases volume with the `amixer set Master 10%+` command, displays
-graphical notification:
+Increases volume with the `amixer set Master 10%+ unmute` command, 
+displays graphical notification:
 
 ![volume](http://nwg.pl/obhud/images/volume.png)
 

@@ -83,17 +83,13 @@ Displays graphical notification:
 Displays graphical notification.
 
 ## Installation
-The package has not yet been published on AUR, as the script needs
-some more testing. If you'd like to help, you can make a 
-package on your own, or download the latest version from [the dist
-folder](https://github.com/nwg-piotr/obhud/tree/master/dist).
+I only packaged this script for Arch Linux so far. Please search
+the [obhud](https://aur.archlinux.org/packages/obhud) package in AUR.
 
-### Packaging
-1. Make a folder somewhere in your ~/home, and place 
-the [PKGBUILD file](https://github.com/nwg-piotr/obhud/raw/master/dist/PKGBUILD) inside.
-2. In terminal enter the folder, execute the `makepkg` command.
+Feel free to make packages for other Linux distributions. Just let me
+know for them to be linked here.
 
-### Installing manually
-
-`sudo pacman -U obhud-0.0.1-5-x86_64.pkg.tar.xz`
+## Credits
+I used icons from [numix-gtk-theme](https://www.archlinux.org/packages/community/any/numix-gtk-theme)
+by [Numix Project](http://numixproject.org) as the base of the icon set. Thanks!
 

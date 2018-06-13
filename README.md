@@ -111,7 +111,7 @@ Displays graphical notification:
 Displays graphical notification.
 
 ## Installation
-I only packaged this script for Arch Linux so far. Please search
+I only packaged this script for Arch Linux. Please search
 the [obhud](https://aur.archlinux.org/packages/obhud) package in AUR.
 
 Feel free to make packages for other Linux distributions. Just let me
@@ -120,7 +120,7 @@ know for them to be linked here.
 ## Configuration
 If you'd like to change default bash comands (e.g. to 
 increase/decrease volume/brightness by 5% instead of 10%), you can
-edit the ~/.config/obhud/obhud.conf file. Leave double `%%` as is.
+edit the `~/.config/obhud/obhud.conf` file. Leave double `%%` as is.
 ````commandline
 [Commands]
 # You can modify default commands in the ~/config/obhud/obhud.conf file.

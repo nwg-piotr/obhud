@@ -121,7 +121,7 @@ know for them to be linked here.
 If you'd like to change default bash comands (e.g. to 
 increase/decrease volume/brightness by 5% instead of 10%), you can
 edit the ~/.config/obhud/obhud.conf file. Leave double `%%` as is.
-````buildoutcfg
+````commandline
 [Commands]
 # You can modify default commands in the ~/config/obhud/obhud.conf file.
 # In case you got lost, just delete it. It'll be re-created from

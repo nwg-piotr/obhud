@@ -132,6 +132,16 @@ volume_toggle = amixer set Master toggle -q
 brightness_up = xbacklight +10
 brightness_down = xbacklight -10
 ```` 
+## Troubleshooting
+For the `xbacklight` command to work, you may need the 
+`/etc/X11/xorg.conf.d/10-backlight.conf` file:
+````commandline
+Section "Device"
+    Identifier  "Card0"
+    Driver      "intel"
+    Option      "Backlight"  "intel_backlight"
+EndSection
+````
 
 ## Credits
 I used icons from [numix-gtk-theme](https://www.archlinux.org/packages/community/any/numix-gtk-theme)

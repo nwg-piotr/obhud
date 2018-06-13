@@ -2,13 +2,14 @@ import sys
 import os
 import values
 
-from commands import volume, brightness, battery, ac, check_dimensions
+from commands import volume, brightness, battery, ac, check_dimensions, config_load
 
 
 def main():
 
     values.tmp = os.getenv("HOME") + "/tmp".rstrip()
-    print(values.tmp)
+
+    config_load()
 
     check_dimensions()
 

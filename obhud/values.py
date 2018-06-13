@@ -8,3 +8,10 @@ hud_margin_v = None
 hud_geometry = None
 
 tmp = ""
+
+volume_up = ''
+volume_down = ''
+volume_toggle = ''
+
+brightness_up = ''
+brightness_down = ''

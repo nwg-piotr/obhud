@@ -3,17 +3,25 @@ import os
 from tkinter import Tk, Frame, Canvas  # Dependencies!
 from PIL import Image, ImageTk  # Dependencies!
 
+import configparser
+
 import values
 
 volume_get_level = 'amixer sget Master | grep \'Right:\' | awk -F\'[][]\' \'{ print $2 }\' > ~/tmp'
-volume_up = 'amixer set Master 10%+ unmute'
-volume_down = 'amixer set Master 10%-'
-volume_toggle = 'amixer set Master toggle'
 volume_get_status = 'amixer sget Master | grep \'Right:\' | awk -F\'[][]\' \'{ print $4 }\' > ~/tmp'
 
 brightness_get_level = 'xbacklight -get > ~/tmp'
-brightness_up = 'xbacklight +10'
-brightness_down = 'xbacklight -10'
+
+"""
+Variables:
+    volume_up = ''
+    volume_down = ''
+    volume_toggle = ''
+    
+    brightness_up = ''
+    brightness_down = ''
+moved to values.py. Being set with 
+"""
 
 
 class Hud(Tk):
@@ -47,11 +55,11 @@ def show_hud(icon, message, timeout):
 
 def volume(command):
     if command == "up":
-        os.system(volume_up)
+        os.system(values.volume_up)
     elif command == "down":
-        os.system(volume_down)
+        os.system(values.volume_down)
     elif command == "toggle":
-        os.system(volume_toggle)
+        os.system(values.volume_toggle)
 
     os.system(volume_get_level)
     volume_lvl = open(values.tmp, 'r').read()
@@ -96,9 +104,9 @@ def brightness(command):
     EndSection
     """
     if command == "up":
-        os.system(brightness_up)
+        os.system(values.brightness_up)
     elif command == "down":
-        os.system(brightness_down)
+        os.system(values.brightness_down)
 
     os.system(brightness_get_level)
     brightness_lvl = open(values.tmp, 'r').read()
@@ -164,3 +172,29 @@ def check_dimensions():
     values.hud_geometry = str(values.hud_side) + "x" + str(values.hud_side) + "+" + str(
         int(values.screen_width / 2 - values.hud_side / 2)) + "+" + str(
         values.screen_height - values.hud_side - values.hud_margin_v)
+
+
+def config_load():
+    config = configparser.ConfigParser()
+    try:
+        with open(os.getenv("HOME") + '/.config/obhud/obhud.conf') as f:
+            config.read_file(f)
+            if config.has_section("Commands") \
+                    and config.has_option("Commands", "volume_up") \
+                    and config.has_option("Commands", "volume_down") \
+                    and config.has_option("Commands", "volume_toggle") \
+                    and config.has_option("Commands", "brightness_up") \
+                    and config.has_option("Commands", "brightness_down"):
+
+                values.volume_up = config.get("Commands", "volume_up")
+                values.volume_down = config.get("Commands", "volume_down")
+                values.volume_toggle = config.get("Commands", "volume_toggle")
+                values.brightness_up = config.get("Commands", "brightness_up")
+                values.brightness_down = config.get("Commands", "brightness_down")
+
+                # print("config loaded from ~/.config/obhud/obhud.conf")
+
+    except IOError:
+        # print("~/.config/obhud/obhud.conf not found, copying default...")
+        os.system('cp -rf /etc/obhud ~/.config')
+        config_load()

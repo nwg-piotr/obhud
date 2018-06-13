@@ -22,8 +22,36 @@ You can either assign commands to keys with [obkey](https://code.google.com/arch
 
 ![obkey](http://nwg.pl/obhud/images/obkey1.png)
 
-...or just paste [this XML](https://gist.github.com/nwg-piotr/d357206b3779362797e9c43879f38615) 
-into the `<keyboard></keyboard>` section of your `rc.xml` file.
+...or just paste the XML below 
+into the `<keyboard></keyboard>` section of your `rc.xml` file:
+
+````xml
+    <keybind key="XF86MonBrightnessDown">
+      <action name="Execute">
+        <command>obhud --brightness down</command>
+      </action>
+    </keybind>
+    <keybind key="XF86MonBrightnessUp">
+      <action name="Execute">
+        <command>obhud --brightness up</command>
+      </action>
+    </keybind>
+    <keybind key="XF86AudioRaiseVolume">
+      <action name="Execute">
+        <command>obhud --volume up</command>
+      </action>
+    </keybind>
+    <keybind key="XF86AudioLowerVolume">
+      <action name="Execute">
+        <command>obhud --volume down</command>
+      </action>
+    </keybind>
+    <keybind key="XF86AudioMute">
+      <action name="Execute">
+        <command>obhud --volume toggle</command>
+      </action>
+    </keybind>
+````
 
 To make use of the battery-related commands, enter them in the 
 Tint2 preferences:

@@ -13,10 +13,11 @@ battery state, and also suspend on critical battery level.
 
 ## Usage
 ````
-obltk --volume {up} | {down} | {toggle}
-obltk --brightness {up} | {down}
-obltk --battery {low} | {full}
-obltk --ac {connected} | {disconnected}
+obhud --volume {up} | {down} | {toggle}
+obhud --brightness {up} | {down}
+obhud --battery {low} | {full}
+obhud --ac {connected} | {disconnected}
+obhud --touchpad {on} | {off}
 ````
 You can either assign commands to keys with [obkey](https://code.google.com/archive/p/obkey)...
 
@@ -60,55 +61,67 @@ Tint2 preferences:
 
 ## Commands description
 
-### obltk --volume up
+### obhud --volume up
 
 Increases volume with the `amixer set Master 10%+ unmute` command, 
 displays graphical notification:
 
 ![volume](http://nwg.pl/obhud/images/volume.png)
 
-### obltk --volume down
+### obhud --volume down
 
 Decreases volume with the `amixer set Master 10%-` command, displays
 graphical notification.
 
-### obltk --volume toggle
+### obhud --volume toggle
 
 Decreases volume with the `amixer set Master toggle` command, displays
 graphical notification.
 
-### obltk --brightness up
+### obhud --brightness up
 
 Increases brightness with the `xbacklight +10` command, displays
 graphical notification:
 
 ![brightness](http://nwg.pl/obhud/images/brightness.png)
 
-### obltk --brightness down
+### obhud --brightness down
 
 Decreases brightness with the `xbacklight -10` command, displays
 graphical notification.
 
-### obltk --battery low
+### obhud --battery low
 
 Displays graphical notification (10 seconds long), then suspends 
 the system with `systemctl suspend`.
 
 ![battery-low](http://nwg.pl/obhud/images/battery-low.png)
 
-### obltk --battery full
+### obhud --battery full
 
 Displays graphical notification.
 
-### obltk --ac connected
+### obhud --ac connected
 
 Displays graphical notification:
 
 ![ac-connected](http://nwg.pl/obhud/images/ac-connected.png)
 
-### obltk --ac disconnected
+### obhud --ac disconnected
 
 Displays graphical notification.
+
+### obhud --touchpad on
+
+Turns the touchpad on with the `synclient TouchpadOff=0` command, displays
+graphical notification.
+
+![touchpad-on](http://nwg.pl/obhud/images/touchpad-on.png)
+
+### obhud --touchpad off
+
+Turns the touchpad off with the `synclient TouchpadOff=1` command, displays
+graphical notification.
 
 ## Installation
 I only packaged this script for Arch Linux. Please search
@@ -131,6 +144,9 @@ volume_down = amixer set Master 10%%- -q
 volume_toggle = amixer set Master toggle -q
 brightness_up = xbacklight +10
 brightness_down = xbacklight -10
+touchpad_on = synclient TouchpadOff=0
+touchpad_off = synclient TouchpadOff=1
+
 ```` 
 ## Troubleshooting
 For the `xbacklight` command to work, you may need the 

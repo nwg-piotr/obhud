@@ -118,7 +118,7 @@ Displays graphical notification.
 
 ### obhud --touchpad toggle
 
-*If it comes to the touchpad button, it may behave differently on different machines:
+**NOTE:** *If it comes to the touchpad button, it may behave differently on different machines:
 either always return the `XF86TouchpadToggle` value, or `XF86TouchpadOn` and 
 `XF86TouchpadOff` every second press. Check which way it works on your laptop with 
 the `xev` command (`xorg-xev` package).*

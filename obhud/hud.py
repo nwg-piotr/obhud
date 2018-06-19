@@ -20,7 +20,7 @@ def main():
         print("--brightness {up} | {down}")
         print("--battery {low} | {full}")
         print("--ac {connected} | {disconnected}")
-        print("--touchpad {on} | {off}")
+        print("--touchpad {toggle} | {on} | {off}")
 
         sys.exit(0)
 
@@ -49,7 +49,7 @@ def main():
             print("Unknown command \'" + sys.argv[2] + "\'")
 
     elif sys.argv[1] == "--touchpad":
-        if sys.argv[2] == "on" or sys.argv[2] == "off":
+        if sys.argv[2] == "on" or sys.argv[2] == "off" or sys.argv[2] == "toggle":
             touchpad(sys.argv[2])
         else:
             print("Unknown command \'" + sys.argv[2] + "\'")

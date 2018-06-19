@@ -1,7 +1,7 @@
 import os
 
-from tkinter import Tk, Frame, Canvas  # Dependencies!
-from PIL import Image, ImageTk  # Dependencies!
+from tkinter import Tk, Frame, Canvas
+from PIL import Image, ImageTk
 
 import configparser
 
@@ -12,16 +12,7 @@ volume_get_status = 'amixer sget Master | grep \'Right:\' | awk -F\'[][]\' \'{ p
 
 brightness_get_level = 'xbacklight -get > ~/tmp'
 
-"""
-Variables:
-    volume_up = ''
-    volume_down = ''
-    volume_toggle = ''
-    
-    brightness_up = ''
-    brightness_down = ''
-moved to values.py. Being set with 
-"""
+touchpad_get_status = 'synclient -l | grep TouchpadOff | awk \'{print $3}\' > ~/tmp'
 
 
 class Hud(Tk):
@@ -130,6 +121,20 @@ def touchpad(command):
     elif command == "off":
         os.system(values.touchpad_off)
         show_hud("touchpad-off", "Touchpad off", 1000)
+    elif command == "toggle":
+        os.system(touchpad_get_status)
+        touchpad_status = open(values.tmp, 'r').read()
+        touchpad_status = touchpad_status.rstrip()
+        os.remove(values.tmp)
+
+        if touchpad_status == "0":
+            os.system(values.touchpad_off)
+            show_hud("touchpad-off", "Touchpad off", 1000)
+        elif touchpad_status == "1":
+            os.system(values.touchpad_on)
+            show_hud("touchpad-on", "Touchpad on", 1000)
+        else:
+            print("Failed checking status")
 
 
 def battery(command):

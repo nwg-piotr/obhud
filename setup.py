@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="obhud",
-    version="0.1.1",
+    version="0.1.1-2",
     author="Piotr Miller",
     author_email="nwg.piotr@gmail.com",
 

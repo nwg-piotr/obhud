@@ -52,6 +52,11 @@ into the `<keyboard></keyboard>` section of your `rc.xml` file:
         <command>obhud --volume toggle</command>
       </action>
     </keybind>
+    <keybind key="XF86TouchpadToggle">
+      <action name="Execute">
+        <command>obhud --touchpad toggle</command>
+      </action>
+    </keybind>
 ````
 
 To make use of the battery-related commands, enter them in the 

@@ -17,7 +17,7 @@ obhud --volume {up} | {down} | {toggle}
 obhud --brightness {up} | {down}
 obhud --battery {low} | {full}
 obhud --ac {connected} | {disconnected}
-obhud --touchpad {on} | {off}
+obhud --touchpad {on} | {off} | {toggle}
 ````
 You can either assign commands to keys with [obkey](https://code.google.com/archive/p/obkey)...
 
@@ -111,12 +111,22 @@ Displays graphical notification:
 
 Displays graphical notification.
 
+### obhud --touchpad toggle
+
+*If it comes to the touchpad button, it may behave differently on different machines:
+either always return the `XF86TouchpadToggle` value, or `XF86TouchpadOn` and 
+`XF86TouchpadOff` every second press. Check which way it works on your laptop with 
+the `xev` command (`xorg-xev` package).*
+
+The `obhud --touchpad toggle` command first checks the touchpad status, then turns
+it on / off accordingly, and displays graphical notification:
+
+![touchpad-on](http://nwg.pl/obhud/images/touchpad-on.png)
+
 ### obhud --touchpad on
 
 Turns the touchpad on with the `synclient TouchpadOff=0` command, displays
 graphical notification.
-
-![touchpad-on](http://nwg.pl/obhud/images/touchpad-on.png)
 
 ### obhud --touchpad off
 

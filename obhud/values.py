@@ -15,3 +15,5 @@ volume_toggle = ''
 
 brightness_up = ''
 brightness_down = ''
+touchpad_on = ''
+touchpad_off = ''

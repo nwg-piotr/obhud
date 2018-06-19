@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="obhud",
-    version="0.1.0",
+    version="0.1.1",
     author="Piotr Miller",
     author_email="nwg.piotr@gmail.com",
 
@@ -18,7 +18,8 @@ setup(
 
     long_description=open("README.txt").read(),
     install_requires=[
-          'xorg-xbacklight', 'xorg-xrandr', 'libxrandr', 'alsa-utils', 'python', 'python-pmw', 'python-pillow', 'python-psutil',
-      ],
+        'xorg-xbacklight', 'xorg-xrandr', 'libxrandr', 'alsa-utils', 'python', 'python-pmw', 'python-pillow',
+        'python-psutil', 'xf86-input-synaptics'
+    ],
     platforms=['any'],
 )

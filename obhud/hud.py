@@ -2,7 +2,7 @@ import sys
 import os
 import values
 
-from commands import volume, brightness, battery, ac, check_dimensions, config_load
+from commands import volume, brightness, battery, ac, touchpad, check_dimensions, config_load
 
 
 def main():
@@ -14,12 +14,13 @@ def main():
     check_dimensions()
 
     if len(sys.argv) <= 2 or sys.argv[1] != "--volume" and sys.argv[1] != "--brightness" and sys.argv[
-                1] != "--battery" and sys.argv[1] != "--ac":
+                1] != "--battery" and sys.argv[1] != "--ac" and sys.argv[1] != "--touchpad":
         print("Usage:")
         print("--volume {up} | {down} | {toggle}")
         print("--brightness {up} | {down}")
         print("--battery {low} | {full}")
         print("--ac {connected} | {disconnected}")
+        print("--touchpad {on} | {off}")
 
         sys.exit(0)
 
@@ -44,6 +45,12 @@ def main():
     elif sys.argv[1] == "--ac":
         if sys.argv[2] == "connected" or sys.argv[2] == "disconnected":
             ac(sys.argv[2])
+        else:
+            print("Unknown command \'" + sys.argv[2] + "\'")
+
+    elif sys.argv[1] == "--touchpad":
+        if sys.argv[2] == "on" or sys.argv[2] == "off":
+            touchpad(sys.argv[2])
         else:
             print("Unknown command \'" + sys.argv[2] + "\'")
 

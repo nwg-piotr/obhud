@@ -93,16 +93,6 @@ def volume(command):
 
 
 def brightness(command):
-    """
-    For this to work we need the xorg-xbacklight package.
-    You may also need the /etc/X11/xorg.conf.d/10-backlight.conf file as below:
-
-    Section "Device"
-        Identifier  "Card0"
-        Driver      "intel"
-        Option      "Backlight"  "intel_backlight"
-    EndSection
-    """
     if command == "up":
         os.system(values.brightness_up)
     elif command == "down":
@@ -131,6 +121,15 @@ def brightness(command):
         brightness_icon = "brightness-medium"
 
     show_hud(brightness_icon, brightness_str, 1000)
+
+
+def touchpad(command):
+    if command == "on":
+        os.system(values.touchpad_on)
+        show_hud("touchpad-on", "Touchpad on", 1000)
+    elif command == "off":
+        os.system(values.touchpad_off)
+        show_hud("touchpad-off", "Touchpad off", 1000)
 
 
 def battery(command):
@@ -184,17 +183,23 @@ def config_load():
                     and config.has_option("Commands", "volume_down") \
                     and config.has_option("Commands", "volume_toggle") \
                     and config.has_option("Commands", "brightness_up") \
-                    and config.has_option("Commands", "brightness_down"):
+                    and config.has_option("Commands", "brightness_down") \
+                    and config.has_option("Commands", "touchpad_on") \
+                    and config.has_option("Commands", "touchpad_off"):
 
                 values.volume_up = config.get("Commands", "volume_up")
                 values.volume_down = config.get("Commands", "volume_down")
                 values.volume_toggle = config.get("Commands", "volume_toggle")
                 values.brightness_up = config.get("Commands", "brightness_up")
                 values.brightness_down = config.get("Commands", "brightness_down")
+                values.touchpad_on = config.get("Commands", "touchpad_on")
+                values.touchpad_off = config.get("Commands", "touchpad_off")
 
                 # print("config loaded from ~/.config/obhud/obhud.conf")
+            else:
+                raise IOError('Missing configuration key')
 
     except IOError:
-        # print("~/.config/obhud/obhud.conf not found, copying default...")
+        print("~/.config/obhud/obhud.conf not found or invalid, copying default...")
         os.system('cp -rf /etc/obhud ~/.config')
         config_load()

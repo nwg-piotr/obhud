@@ -80,8 +80,10 @@ graphical notification.
 
 ### obhud --volume toggle
 
-Decreases volume with the `amixer set Master toggle` command, displays
+Turns sound on/off with the `amixer set Master toggle` command, displays
 graphical notification.
+
+![volume-toggle](http://nwg.pl/obhud/images/volume-toggle.png)
 
 ### obhud --brightness up
 

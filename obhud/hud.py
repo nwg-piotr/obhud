@@ -2,11 +2,10 @@ import sys
 import os
 import values
 
-from commands import volume, brightness, battery, ac, touchpad, check_dimensions, config_load
+from commands import volume, brightness, battery, ac, touchpad, check_dimensions, config_load, autoconfig_tint2
 
 
 def main():
-
     values.tmp = os.getenv("HOME") + "/tmp".rstrip()
 
     config_load()
@@ -14,13 +13,14 @@ def main():
     check_dimensions()
 
     if len(sys.argv) <= 2 or sys.argv[1] != "--volume" and sys.argv[1] != "--brightness" and sys.argv[
-                1] != "--battery" and sys.argv[1] != "--ac" and sys.argv[1] != "--touchpad":
+        1] != "--battery" and sys.argv[1] != "--ac" and sys.argv[1] != "--touchpad" and sys.argv[1] != "--autoconfig":
         print("Usage:")
         print("--volume {up} | {down} | {toggle}")
         print("--brightness {up} | {down}")
         print("--battery {low} | {full}")
         print("--ac {connected} | {disconnected}")
         print("--touchpad {toggle} | {on} | {off}")
+        print("--autoconfig {tint2}")
 
         sys.exit(0)
 
@@ -51,6 +51,12 @@ def main():
     elif sys.argv[1] == "--touchpad":
         if sys.argv[2] == "on" or sys.argv[2] == "off" or sys.argv[2] == "toggle":
             touchpad(sys.argv[2])
+        else:
+            print("Unknown command \'" + sys.argv[2] + "\'")
+
+    elif sys.argv[1] == "--autoconfig":
+        if sys.argv[2] == "tint2":
+            autoconfig_tint2()
         else:
             print("Unknown command \'" + sys.argv[2] + "\'")
 

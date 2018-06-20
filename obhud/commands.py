@@ -1,4 +1,5 @@
 import os
+import sys
 
 from tkinter import Tk, Frame, Canvas
 from PIL import Image, ImageTk
@@ -212,27 +213,35 @@ def config_load():
 
 def autoconfig_tint2():
     tint2rc = os.getenv("HOME") + '/.config/tint2/tint2rc'
-    try:
-        with open(tint2rc, 'r') as file:
-            data = file.readlines()
 
-        for i in range(len(data)):
-            row = data[i]
-            if row.startswith('battery_low_cmd'):
-                data[i] = "battery_low_cmd = obhud --battery low\n"
-            elif row.startswith('battery_full_cmd'):
-                data[i] = "battery_full_cmd = obhud --battery full\n"
-            elif row.startswith('ac_connected_cmd'):
-                data[i] = "ac_connected_cmd = obhud --ac connected\n"
-            elif row.startswith('ac_disconnected_cmd'):
-                data[i] = "ac_disconnected_cmd = obhud --ac disconnected\n"
+    if input("This will modify the tint2rc file, proceed? (Y/N) ").upper() == "Y":
+
+        try:
+            with open(tint2rc, 'r') as file:
+                data = file.readlines()
+
+            for i in range(len(data)):
+                row = data[i]
+                if row.startswith('battery_low_cmd'):
+                    data[i] = "battery_low_cmd = obhud --battery low\n"
+                elif row.startswith('battery_full_cmd'):
+                    data[i] = "battery_full_cmd = obhud --battery full\n"
+                elif row.startswith('ac_connected_cmd'):
+                    data[i] = "ac_connected_cmd = obhud --ac connected\n"
+                elif row.startswith('ac_disconnected_cmd'):
+                    data[i] = "ac_disconnected_cmd = obhud --ac disconnected\n"
+
+            os.system('mv -f ' + tint2rc + ' ' + tint2rc + '.bck.obhud')
 
             with open(tint2rc, 'w') as file:
                 file.writelines(data)
 
-            os.system('pkill -9 -f tint2')
-            os.system('tint2')
+            os.system('killall -SIGUSR1 tint2 || pkill -SIGUSR1 -x tint2')
+            print("\nTint2 battery and AC commands added to the \'tint2rc\' file")
+            print("Original file renamed to \'tint2rc.bck.obhud\'")
 
-    except IOError:
-        print("~/.config/tint2/tint2rc file not found")
+        except IOError:
+            print("~/.config/tint2/tint2rc file not found")
 
+    else:
+        print("\nAutoconfig Tint2 cancelled")

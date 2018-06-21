@@ -5,7 +5,7 @@ from PIL import Image, ImageTk
 
 import configparser
 
-import xml.etree.ElementTree as ET
+import lxml.etree as ET
 
 import values
 
@@ -250,10 +250,18 @@ def autoconfig_tint2():
 
 def autoconfig_keys():
     rcxml = os.getenv("HOME") + '/.config/openbox/rc.xml'
-
     tree = ET.parse(rcxml)
     root = tree.getroot()
+    keyboard = root.find('{http://openbox.org/3.4/rc}keyboard')
 
-    print(root.tag)
-    for child in root[8]:
-        print(child.tag, child.attrib.get('key'))
+    for child in keyboard:
+        if child.tag == '{http://openbox.org/3.4/rc}keybind' and child.get('key').startswith('XF86'):
+            print(child.tag, child.attrib)
+            for action in child:
+                print(action.tag, action.attrib)
+                for command in action:
+                    print(command.tag, command.text)
+
+            child.getparent().remove(child)
+
+    tree.write(os.getenv("HOME") + '/.config/openbox/rc_new.xml', encoding='utf-8', with_tail=True, xml_declaration=True)

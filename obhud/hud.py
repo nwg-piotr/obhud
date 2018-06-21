@@ -2,7 +2,8 @@ import sys
 import os
 import values
 
-from commands import volume, brightness, battery, ac, touchpad, check_dimensions, config_load, autoconfig_tint2
+from commands import volume, brightness, battery, ac, touchpad, check_dimensions, config_load, autoconfig_tint2, \
+    autoconfig_keys
 
 
 def main():
@@ -20,7 +21,7 @@ def main():
         print("--battery {low} | {full}")
         print("--ac {connected} | {disconnected}")
         print("--touchpad {toggle} | {on} | {off}")
-        print("--autoconfig {tint2}")
+        print("--autoconfig {keys} | {tint2}")
 
         sys.exit(0)
 
@@ -57,6 +58,8 @@ def main():
     elif sys.argv[1] == "--autoconfig":
         if sys.argv[2] == "tint2":
             autoconfig_tint2()
+        elif sys.argv[2] == "keys":
+            autoconfig_keys()
         else:
             print("Unknown command \'" + sys.argv[2] + "\'")
 

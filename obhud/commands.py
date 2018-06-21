@@ -1,10 +1,11 @@
 import os
-import sys
 
 from tkinter import Tk, Frame, Canvas
 from PIL import Image, ImageTk
 
 import configparser
+
+import xml.etree.ElementTree as ET
 
 import values
 
@@ -245,3 +246,14 @@ def autoconfig_tint2():
 
     else:
         print("\nAutoconfig Tint2 cancelled")
+
+
+def autoconfig_keys():
+    rcxml = os.getenv("HOME") + '/.config/openbox/rc.xml'
+
+    tree = ET.parse(rcxml)
+    root = tree.getroot()
+
+    print(root.tag)
+    for child in root[8]:
+        print(child.tag, child.attrib.get('key'))

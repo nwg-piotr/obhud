@@ -215,7 +215,7 @@ def config_load():
 def autoconfig_tint2():
     tint2rc = os.getenv("HOME") + '/.config/tint2/tint2rc'
 
-    if input("This will modify the tint2rc file, proceed? (Y/N) ").upper() == "Y":
+    if input("\nYou are about to modify the tint2rc file, proceed? (Y/N) ").upper() == "Y":
 
         try:
             with open(tint2rc, 'r') as file:
@@ -237,9 +237,10 @@ def autoconfig_tint2():
             with open(tint2rc, 'w') as file:
                 file.writelines(data)
 
-            os.system('killall -SIGUSR1 tint2 || pkill -SIGUSR1 -x tint2')
             print("\nTint2 battery and AC commands added to the \'tint2rc\' file")
-            print("Original file renamed to \'tint2rc.bck.obhud\'")
+            print("Original file renamed to \'tint2rc.bck.obhud\'\n")
+
+            os.system('killall -SIGUSR1 tint2 || pkill -SIGUSR1 -x tint2')
 
         except IOError:
             print("~/.config/tint2/tint2rc file not found")
@@ -249,19 +250,60 @@ def autoconfig_tint2():
 
 
 def autoconfig_keys():
-    rcxml = os.getenv("HOME") + '/.config/openbox/rc.xml'
-    tree = ET.parse(rcxml)
-    root = tree.getroot()
-    keyboard = root.find('{http://openbox.org/3.4/rc}keyboard')
 
-    for child in keyboard:
-        if child.tag == '{http://openbox.org/3.4/rc}keybind' and child.get('key').startswith('XF86'):
-            print(child.tag, child.attrib)
-            for action in child:
-                print(action.tag, action.attrib)
-                for command in action:
-                    print(command.tag, command.text)
+    if input("\nYou are about to modify the rc.xml file, proceed? (Y/N) ").upper() == "Y":
 
-            child.getparent().remove(child)
+        rcxml = os.getenv("HOME") + '/.config/openbox/rc.xml'
+        parser = ET.XMLParser(remove_blank_text=True)
+        tree = ET.parse(rcxml, parser)
+        root = tree.getroot()
+        keyboard = root.find('{http://openbox.org/3.4/rc}keyboard')
 
-    tree.write(os.getenv("HOME") + '/.config/openbox/rc_new.xml', encoding='utf-8', with_tail=True, xml_declaration=True)
+        for child in keyboard:
+            if child.tag == '{http://openbox.org/3.4/rc}keybind' and child.get('key') == 'XF86MonBrightnessDown' \
+                    or child.get('key') == 'XF86MonBrightnessUp' \
+                    or child.get('key') == 'XF86AudioRaiseVolume' \
+                    or child.get('key') == 'XF86AudioLowerVolume' \
+                    or child.get('key') == 'XF86AudioMute' \
+                    or child.get('key') == 'XF86TouchpadToggle':
+
+                child.getparent().remove(child)
+
+        keybindings = {'XF86MonBrightnessDown': 'obhud --brightness down',
+                       'XF86MonBrightnessUp': 'obhud --brightness up',
+                       'XF86AudioRaiseVolume': 'obhud --volume up',
+                       'XF86AudioLowerVolume': 'obhud --volume down',
+                       'XF86AudioMute': 'obhud --volume toggle',
+                       'XF86TouchpadToggle': 'obhud --touchpad toggle',
+                       'XF86TouchpadOn': 'obhud --touchpad on',
+                       'XF86TouchpadOff': 'obhud --touchpad off'}
+
+        for key, command in keybindings.items():
+            bind_key(keyboard, key, command)
+
+        tree.write(os.getenv("HOME") + '/.config/openbox/rc_new.xml', encoding='utf-8', with_tail=True, xml_declaration=True, method='xml', pretty_print=True)
+
+        print("\nKey bindings added to the \'rc.mxl\' file")
+        print("Original file renamed to \'rc.xml.bck.obhud\'")
+
+        os.system('openbox --reconfigure')
+
+    else:
+        print("\nAutoconfig keybindings cancelled")
+
+
+def bind_key(et_item, key, com):
+    keybind = ET.SubElement(et_item, 'keybind')
+    keybind.set('key', key)
+    action = ET.SubElement(keybind, 'action')
+    action.set('name', 'Execute')
+    command = ET.SubElement(action, 'command')
+    command.text = com
+
+
+def autoconfig_all():
+    print("\nThis will assign obhud commands and notifications to keys in Openbox rc.xml")
+    print("configuration file, and also to AC- and battery-related events in Tint2.")
+    print("See \033[1;34mhttps://github.com/nwg-piotr/obhud\033[0m for details.")
+    autoconfig_keys()
+    autoconfig_tint2()

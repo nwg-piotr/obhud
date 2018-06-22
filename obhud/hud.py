@@ -15,13 +15,14 @@ def main():
 
     if len(sys.argv) <= 2 or sys.argv[1] != "--volume" and sys.argv[1] != "--brightness" and sys.argv[
         1] != "--battery" and sys.argv[1] != "--ac" and sys.argv[1] != "--touchpad" and sys.argv[1] != "--autoconfig":
-        print("Usage:")
+        print("\nUsage:")
         print("--volume {up} | {down} | {toggle}")
         print("--brightness {up} | {down}")
         print("--battery {low} | {full}")
         print("--ac {connected} | {disconnected}")
         print("--touchpad {toggle} | {on} | {off}")
         print("--autoconfig {keys} | {tint2} | {all}")
+        print("\nSee \033[1;34mhttps://github.com/nwg-piotr/obhud\033[0m for more.\n")
 
         sys.exit(0)
 

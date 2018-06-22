@@ -5,7 +5,7 @@ from PIL import Image, ImageTk
 
 import configparser
 
-import lxml.etree as ET
+import lxml.etree as ET  # depends on python-lxml
 
 import values
 
@@ -237,59 +237,63 @@ def autoconfig_tint2():
             with open(tint2rc, 'w') as file:
                 file.writelines(data)
 
-            print("\nTint2 battery and AC commands added to the \'tint2rc\' file")
-            print("Original file renamed to \'tint2rc.bck.obhud\'\n")
+            print("\nTint2 battery and AC commands added to the \'tint2rc\' file,")
+            print("original file renamed to \'tint2rc.bck.obhud\'.\n")
 
             os.system('killall -SIGUSR1 tint2 || pkill -SIGUSR1 -x tint2')
 
         except IOError:
-            print("~/.config/tint2/tint2rc file not found")
+            print("ERROR: couldn\'t open ~/.config/tint2/tint2rc")
 
     else:
-        print("\nAutoconfig Tint2 cancelled")
+        print("\nAutoconfig Tint2 cancelled.")
 
 
 def autoconfig_keys():
-
     if input("\nYou are about to modify the rc.xml file, proceed? (Y/N) ").upper() == "Y":
 
-        rcxml = os.getenv("HOME") + '/.config/openbox/rc.xml'
-        parser = ET.XMLParser(remove_blank_text=True)
-        tree = ET.parse(rcxml, parser)
-        root = tree.getroot()
-        keyboard = root.find('{http://openbox.org/3.4/rc}keyboard')
+        try:
+            rcxml = os.getenv("HOME") + '/.config/openbox/rc.xml'
+            parser = ET.XMLParser(remove_blank_text=True)
+            tree = ET.parse(rcxml, parser)
+            root = tree.getroot()
+            keyboard = root.find('{http://openbox.org/3.4/rc}keyboard')
 
-        for child in keyboard:
-            if child.tag == '{http://openbox.org/3.4/rc}keybind' and child.get('key') == 'XF86MonBrightnessDown' \
-                    or child.get('key') == 'XF86MonBrightnessUp' \
-                    or child.get('key') == 'XF86AudioRaiseVolume' \
-                    or child.get('key') == 'XF86AudioLowerVolume' \
-                    or child.get('key') == 'XF86AudioMute' \
-                    or child.get('key') == 'XF86TouchpadToggle':
+            for child in keyboard:
+                if child.tag == '{http://openbox.org/3.4/rc}keybind' and child.get('key') == 'XF86MonBrightnessDown' \
+                        or child.get('key') == 'XF86MonBrightnessUp' \
+                        or child.get('key') == 'XF86AudioRaiseVolume' \
+                        or child.get('key') == 'XF86AudioLowerVolume' \
+                        or child.get('key') == 'XF86AudioMute' \
+                        or child.get('key') == 'XF86TouchpadToggle':
+                    child.getparent().remove(child)
 
-                child.getparent().remove(child)
+            keybindings = {'XF86MonBrightnessDown': 'obhud --brightness down',
+                           'XF86MonBrightnessUp': 'obhud --brightness up',
+                           'XF86AudioRaiseVolume': 'obhud --volume up',
+                           'XF86AudioLowerVolume': 'obhud --volume down',
+                           'XF86AudioMute': 'obhud --volume toggle',
+                           'XF86TouchpadToggle': 'obhud --touchpad toggle',
+                           'XF86TouchpadOn': 'obhud --touchpad on',
+                           'XF86TouchpadOff': 'obhud --touchpad off'}
 
-        keybindings = {'XF86MonBrightnessDown': 'obhud --brightness down',
-                       'XF86MonBrightnessUp': 'obhud --brightness up',
-                       'XF86AudioRaiseVolume': 'obhud --volume up',
-                       'XF86AudioLowerVolume': 'obhud --volume down',
-                       'XF86AudioMute': 'obhud --volume toggle',
-                       'XF86TouchpadToggle': 'obhud --touchpad toggle',
-                       'XF86TouchpadOn': 'obhud --touchpad on',
-                       'XF86TouchpadOff': 'obhud --touchpad off'}
+            for key, command in keybindings.items():
+                bind_key(keyboard, key, command)
 
-        for key, command in keybindings.items():
-            bind_key(keyboard, key, command)
+            os.system('mv -f ' + rcxml + ' ' + rcxml + '.bck.obhud')
 
-        tree.write(os.getenv("HOME") + '/.config/openbox/rc_new.xml', encoding='utf-8', with_tail=True, xml_declaration=True, method='xml', pretty_print=True)
+            tree.write(rcxml, encoding='utf-8', with_tail=True, xml_declaration=True, method='xml', pretty_print=True)
 
-        print("\nKey bindings added to the \'rc.mxl\' file")
-        print("Original file renamed to \'rc.xml.bck.obhud\'")
+            print("\nKey bindings added to the \'rc.mxl\' file,")
+            print("original file renamed to \'rc.xml.bck.obhud\'.")
 
-        os.system('openbox --reconfigure')
+            os.system('openbox --reconfigure')
+
+        except:
+            print("ERROR: couldn\'t open ~/.config/openbox/rc.xml")
 
     else:
-        print("\nAutoconfig keybindings cancelled")
+        print("\nAutoconfig keybindings cancelled.")
 
 
 def bind_key(et_item, key, com):

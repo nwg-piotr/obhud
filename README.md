@@ -14,9 +14,9 @@ battery state, and also suspend on critical battery level.
 ## Quick start
 
 **CAUTION:** 
-I did my best to test the script and make sure it's safe. However, the `--autoconfig`
+*I did my best to test the script and make sure it's safe. However, the `--autoconfig`
 options make changes to essential system configuration files. Making backups of
-`~/.config/openbox/rc.xml` and `~/.config/tint2/tin2rc` files is recommended.
+`~/.config/openbox/rc.xml` and `~/.config/tint2/tin2rc` files is recommended.*
 
 If you have [Tint2](https://gitlab.com/o9000/tint2) installed, just enter one command in terminal:
 ````

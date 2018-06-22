@@ -30,7 +30,7 @@ Otherwise, you can only make keybindings in the `rc.xml` file with
 obhud -autoconfig keys
 ````
 
-For more info [check Wiki](https://github.com/nwg-piotr/obhud/wiki).
+For more info [check Wiki](https://github.com/nwg-piotr/obhud/wiki/Openbox-HUD-Wiki).
 
 ## Credits
 I used icons from [numix-gtk-theme](https://www.archlinux.org/packages/community/any/numix-gtk-theme)

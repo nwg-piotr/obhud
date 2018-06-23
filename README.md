@@ -11,6 +11,11 @@ battery state, and also suspend on critical battery level.
 
 ![preview](http://nwg.pl/obhud/images/preview1.png)
 
+## Installation
+
+Arch Linux: search the [obhud](https://aur.archlinux.org/packages/obhud) 
+package in AUR.
+
 ## Quick start
 
 **CAUTION:** 
@@ -27,7 +32,7 @@ and configure Tint2 AC- and battery-related commands in `~/home/config/tint2/tin
 
 Otherwise, you can only make keybindings in the `rc.xml` file with
 ````
-obhud -autoconfig keys
+obhud --autoconfig keys
 ````
 
 For more info [check Wiki](https://github.com/nwg-piotr/obhud/wiki/Openbox-HUD-Wiki).

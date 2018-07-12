@@ -17,3 +17,8 @@ brightness_up = ''
 brightness_down = ''
 touchpad_on = ''
 touchpad_off = ''
+
+preferences_file = ""
+preferences = None
+screen_primary = ""
+screen_secondary = ""

@@ -298,7 +298,7 @@ def autoconfig_keys():
                            'XF86TouchpadToggle': 'obhud --touchpad toggle',
                            'XF86TouchpadOn': 'obhud --touchpad on',
                            'XF86TouchpadOff': 'obhud --touchpad off',
-                           'Super_L': 'obhud --screen switch'}
+                           'Super_L': 'obhud --screens switch'}
 
             for key, command in keybindings.items():
                 bind_key(keyboard, key, command)

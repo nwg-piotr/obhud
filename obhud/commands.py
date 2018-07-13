@@ -286,7 +286,8 @@ def autoconfig_keys():
                         or child.get('key') == 'XF86AudioRaiseVolume' \
                         or child.get('key') == 'XF86AudioLowerVolume' \
                         or child.get('key') == 'XF86AudioMute' \
-                        or child.get('key') == 'XF86TouchpadToggle':
+                        or child.get('key') == 'XF86TouchpadToggle' \
+                        or child.get('key') == 'Super_L':
                     child.getparent().remove(child)
 
             keybindings = {'XF86MonBrightnessDown': 'obhud --brightness down',
@@ -296,7 +297,8 @@ def autoconfig_keys():
                            'XF86AudioMute': 'obhud --volume toggle',
                            'XF86TouchpadToggle': 'obhud --touchpad toggle',
                            'XF86TouchpadOn': 'obhud --touchpad on',
-                           'XF86TouchpadOff': 'obhud --touchpad off'}
+                           'XF86TouchpadOff': 'obhud --touchpad off',
+                           'Super_L': 'obhud --screen switch'}
 
             for key, command in keybindings.items():
                 bind_key(keyboard, key, command)
@@ -417,6 +419,7 @@ def screens_lr(silent):
         if not silent:
             print("Secondary screen not detected, setting single")
         screens_single(silent)
+    show_hud("screens-lr", "Secondary right", 1500)
 
 
 def screens_rl(silent):
@@ -434,6 +437,7 @@ def screens_rl(silent):
         if not silent:
             print("Secondary screen not detected, setting single")
         screens_single(silent)
+    show_hud("screens-rl", "Secondary left", 1500)
 
 
 def screens_clone(silent):
@@ -451,6 +455,7 @@ def screens_clone(silent):
         if not silent:
             print("Secondary screen not detected, setting single")
         screens_single(silent)
+    show_hud("screens-clone", "Clone screen", 1500)
 
 
 def screens_single(silent):
@@ -471,6 +476,7 @@ def screens_single(silent):
         save_preferences()
         if not silent:
             print("Secondary screen not detected")
+    show_hud("screens-single", "Single screen", 1500)
 
 
 def screens_switch():

@@ -415,11 +415,11 @@ def screens_lr(silent):
         os.system(cmd)
         values.preferences.screens_setup = "lr"
         save_preferences()
+        show_hud("screens-lr", "Secondary right", 1500)
     else:
         if not silent:
             print("Secondary screen not detected, setting single")
         screens_single(silent)
-    show_hud("screens-lr", "Secondary right", 1500)
 
 
 def screens_rl(silent):
@@ -433,11 +433,11 @@ def screens_rl(silent):
         os.system(cmd)
         values.preferences.screens_setup = 'rl'
         save_preferences()
+        show_hud("screens-rl", "Secondary left", 1500)
     else:
         if not silent:
             print("Secondary screen not detected, setting single")
         screens_single(silent)
-    show_hud("screens-rl", "Secondary left", 1500)
 
 
 def screens_clone(silent):
@@ -451,11 +451,11 @@ def screens_clone(silent):
         os.system(cmd)
         values.preferences.screens_setup = 'clone'
         save_preferences()
+        show_hud("screens-clone", "Clone screen", 1500)
     else:
         if not silent:
             print("Secondary screen not detected, setting single")
         screens_single(silent)
-    show_hud("screens-clone", "Clone screen", 1500)
 
 
 def screens_single(silent):
@@ -490,3 +490,7 @@ def screens_switch():
             screens_rl(True)
         elif values.preferences.screens_setup == 'rl':
             screens_single(True)
+    else:
+        values.preferences.screens_setup = 'single'
+        save_preferences()
+

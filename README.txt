@@ -1,0 +1,1 @@
+Python script for handling laptop-specific keys in Openbox window manager. Check https://github.com/nwg-piotr/obhud for details.

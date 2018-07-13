@@ -25,7 +25,7 @@ def main():
         print("--ac {connected} | {disconnected}")
         print("--touchpad {toggle} | {on} | {off}")
         print("--autoconfig {keys} | {tint2} | {all}")
-        print("--screens {auto} | {switch}")
+        print("--screens {switch} | {single} | {clone} | {lr} | {rl} | {detect}")
         print("\nSee \033[1;34mhttps://github.com/nwg-piotr/obhud\033[0m for more.\n")
 
         sys.exit(0)
@@ -79,7 +79,7 @@ def main():
             create_preferences()
             values.preferences = load_preferences()
 
-        if sys.argv[2] == "detect" or sys.argv[2] == "auto" or sys.argv[2] == "switch" or sys.argv[2] == "lr" or \
+        if sys.argv[2] == "detect" or sys.argv[2] == "switch" or sys.argv[2] == "lr" or \
                 sys.argv[2] == "rl" or sys.argv[2] == "clone" or sys.argv[2] == "single":
             screens(sys.argv[2])
         else:

@@ -160,16 +160,16 @@ def screens(command):
         screens_detect(False)
 
     elif command == "lr":
-        screens_lr()
+        screens_lr(False)
 
     elif command == "rl":
-        screens_rl()
+        screens_rl(False)
 
     elif command == "clone":
-        screens_clone()
+        screens_clone(False)
 
     elif command == "single":
-        screens_single()
+        screens_single(False)
 
     elif command == "switch":
         screens_switch()
@@ -366,23 +366,29 @@ def screens_detect(silent):
 
     my_screens = screens_string.rstrip().split('\n')
 
+    # primary screen details: we only need the name
     screen0 = my_screens[0].split()[0]
     values.preferences.screen_primary = screen0
 
     if len(my_screens) > 1:
+        # secondary screen details: name, resolution and frequency
+
+        # take the name from above
         screen1 = my_screens[1].split()[0]
         values.preferences.screen_secondary = screen1
 
-        os.system('xrandr | grep \' +\' > ~/tmp')
-        resolution_string = open(values.tmp, 'r').read()
-        print("resolution_string:" + resolution_string)
+        # find missing resolution and frequency; xrandr may return '*+' or ' +' in appropriate lines!
+        os.system('xrandr | grep -e \'*+\' -e \' +\' > ~/tmp')
+        resolution_string = open(values.tmp, 'r').read().rstrip()
         os.remove(values.tmp)
 
-        resolution_data = resolution_string.split()
+        # second line should contain secondary display data
+        both_screens = resolution_string.split("\n")
 
-        if len(resolution_data) > 1:
-            values.preferences.secondary_resolution = resolution_data[0]
-            values.preferences.secondary_rate = resolution_data[1].split(".")[0]
+        secondary_screen = both_screens[1].split()
+
+        values.preferences.secondary_resolution = secondary_screen[0]
+        values.preferences.secondary_rate = secondary_screen[1].split(".")[0]
 
     else:
         values.preferences.screen_secondary = "none"
@@ -396,76 +402,85 @@ def screens_detect(silent):
         print(" | " + values.preferences.screen_secondary + " " + values.preferences.secondary_resolution + " " + values.preferences.secondary_rate)
 
 
-def screens_lr():
+def screens_lr(silent):
     screens_detect(True)
     if values.preferences.screen_secondary != "none":
         cmd = 'xrandr --auto --output ' + values.preferences.screen_secondary + ' --mode ' \
               + values.preferences.secondary_resolution + ' --rate ' \
               + values.preferences.secondary_rate + ' --right-of ' + values.preferences.screen_primary
-        print(cmd)
+        if not silent:
+            print(cmd)
         os.system(cmd)
         values.preferences.screens_setup = "lr"
         save_preferences()
     else:
-        print("Secondary screen not detected, setting single")
-        screens_single()
+        if not silent:
+            print("Secondary screen not detected, setting single")
+        screens_single(silent)
 
 
-def screens_rl():
+def screens_rl(silent):
     screens_detect(False)
     if values.preferences.screen_secondary != "none":
         cmd = 'xrandr --auto --output ' + values.preferences.screen_secondary + ' --mode ' \
               + values.preferences.secondary_resolution + ' --rate ' \
               + values.preferences.secondary_rate + ' --left-of ' + values.preferences.screen_primary
-        print(cmd)
+        if not silent:
+            print(cmd)
         os.system(cmd)
         values.preferences.screens_setup = 'rl'
         save_preferences()
     else:
-        print("Secondary screen not detected, setting single")
-        screens_single()
+        if not silent:
+            print("Secondary screen not detected, setting single")
+        screens_single(silent)
 
 
-def screens_clone():
+def screens_clone(silent):
     screens_detect(False)
     if values.preferences.screen_secondary != "none":
         cmd = 'xrandr --auto --output ' + values.preferences.screen_secondary + ' --mode ' \
               + values.preferences.secondary_resolution + ' --rate ' \
               + values.preferences.secondary_rate + ' --same-as ' + values.preferences.screen_primary
-        print(cmd)
+        if not silent:
+            print(cmd)
         os.system(cmd)
         values.preferences.screens_setup = 'clone'
         save_preferences()
     else:
-        print("Secondary screen not detected, setting single")
-        screens_single()
+        if not silent:
+            print("Secondary screen not detected, setting single")
+        screens_single(silent)
 
 
-def screens_single():
+def screens_single(silent):
     screens_detect(False)
     if values.preferences.screen_secondary != "none":
         cmd = 'xrandr --auto --output ' + values.preferences.screen_secondary + ' --off'
-        print(cmd)
+        if not silent:
+            print(cmd)
         os.system(cmd)
         values.preferences.screens_setup = 'single'
         save_preferences()
     else:
         cmd = 'xrandr --auto'
-        print(cmd)
+        if not silent:
+            print(cmd)
         os.system(cmd)
         values.preferences.screens_setup = 'single'
         save_preferences()
-        print("Secondary screen not detected")
+        if not silent:
+            print("Secondary screen not detected")
 
 
 def screens_switch():
     load_preferences()
     if values.preferences.screens_setup != "none":
         if values.preferences.screens_setup == 'single':
-            screens_clone()
+            screens_clone(True)
         elif values.preferences.screens_setup == 'clone':
-            screens_lr()
+            screens_lr(True)
         elif values.preferences.screens_setup == 'lr':
-            screens_rl()
+            screens_rl(True)
         elif values.preferences.screens_setup == 'rl':
-            screens_single()
+            screens_single(True)

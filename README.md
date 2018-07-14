@@ -11,7 +11,7 @@ battery state, and also suspend on critical battery level.
 
 **New in 0.1.4 version:**
 
-Switching primary/secondary display added. Please run `obhud --autocong keys` or add keybindings manually.
+Switching primary/secondary display added. Please run `obhud --autoconfig keys` or add keybindings manually.
 
 ![preview](http://nwg.pl/obhud/images/preview1.png)
 

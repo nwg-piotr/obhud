@@ -9,7 +9,9 @@ command. Furthermore - assigning a command in [Tint2](https://gitlab.com/o9000/t
 preferences allows to see alerts concerning the AC and
 battery state, and also suspend on critical battery level.
 
-**New in 1.4.3 version: switching primary/secondary display added.**
+**New in 1.4.3 version:**
+
+Switching primary/secondary display added. Please run `obhud --autocong keys` or add keybindings manually.
 
 ![preview](http://nwg.pl/obhud/images/preview1.png)
 

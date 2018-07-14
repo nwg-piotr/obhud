@@ -11,10 +11,10 @@ setup(
     include_package_data=True,
 
     # Details
-    url="https://bitbucket.org/nwg-piotr/obhud/src/master",
+    url="https://github.com/nwg-piotr/obhud",
 
     license='GPL3',
-    description="Script for handling laptop-specific keys in Openbox",
+    description="Script for handling laptop-specific keys and events in Openbox",
 
     long_description=open("README.txt").read(),
     install_requires=[

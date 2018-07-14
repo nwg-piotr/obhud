@@ -290,12 +290,15 @@ def autoconfig_keys():
             keyboard = root.find('{http://openbox.org/3.4/rc}keyboard')
 
             for child in keyboard:
-                if child.tag == '{http://openbox.org/3.4/rc}keybind' and child.get('key') == 'XF86MonBrightnessDown' \
+                if child.tag == '{http://openbox.org/3.4/rc}keybind' \
+                        and child.get('key') == 'XF86MonBrightnessDown' \
                         or child.get('key') == 'XF86MonBrightnessUp' \
                         or child.get('key') == 'XF86AudioRaiseVolume' \
                         or child.get('key') == 'XF86AudioLowerVolume' \
                         or child.get('key') == 'XF86AudioMute' \
                         or child.get('key') == 'XF86TouchpadToggle' \
+                        or child.get('key') == 'XF86TouchpadOn' \
+                        or child.get('key') == 'XF86TouchpadOff' \
                         or child.get('key') == 'W-P' \
                         or child.get('key') == 'S-W-P':
                     child.getparent().remove(child)

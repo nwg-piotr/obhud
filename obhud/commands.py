@@ -159,11 +159,17 @@ def screens(command):
     if command == 'detect':
         screens_detect(False)
 
-    elif command == "lr":
-        screens_lr(False)
+    elif command == "right":
+        screens_right(False)
 
-    elif command == "rl":
-        screens_rl(False)
+    elif command == "left":
+        screens_left(False)
+
+    elif command == "above":
+        screens_above(False)
+
+    elif command == "below":
+        screens_below(False)
 
     elif command == "clone":
         screens_clone(False)
@@ -173,6 +179,9 @@ def screens(command):
 
     elif command == "switch":
         screens_switch()
+
+    elif command == "switchv":
+        screens_switchv()
 
 
 def measure_screen():
@@ -287,7 +296,8 @@ def autoconfig_keys():
                         or child.get('key') == 'XF86AudioLowerVolume' \
                         or child.get('key') == 'XF86AudioMute' \
                         or child.get('key') == 'XF86TouchpadToggle' \
-                        or child.get('key') == 'Super_L':
+                        or child.get('key') == 'W-P' \
+                        or child.get('key') == 'S-W-P':
                     child.getparent().remove(child)
 
             keybindings = {'XF86MonBrightnessDown': 'obhud --brightness down',
@@ -298,7 +308,8 @@ def autoconfig_keys():
                            'XF86TouchpadToggle': 'obhud --touchpad toggle',
                            'XF86TouchpadOn': 'obhud --touchpad on',
                            'XF86TouchpadOff': 'obhud --touchpad off',
-                           'Super_L': 'obhud --screens switch'}
+                           'W-P': 'obhud --screens switch',
+                           'S-W-P': 'obhud --screens switchv'}
 
             for key, command in keybindings.items():
                 bind_key(keyboard, key, command)
@@ -404,7 +415,7 @@ def screens_detect(silent):
         print(" | " + values.preferences.screen_secondary + " " + values.preferences.secondary_resolution + " " + values.preferences.secondary_rate)
 
 
-def screens_lr(silent):
+def screens_right(silent):
     screens_detect(True)
     if values.preferences.screen_secondary != "none":
         cmd = 'xrandr --auto --output ' + values.preferences.screen_secondary + ' --mode ' \
@@ -413,17 +424,17 @@ def screens_lr(silent):
         if not silent:
             print(cmd)
         os.system(cmd)
-        values.preferences.screens_setup = "lr"
+        values.preferences.screens_setup = "right"
         save_preferences()
-        show_hud("screens-lr", "Secondary right", 1500)
+        show_hud("screens-right", "Secondary right", 1500)
     else:
         if not silent:
             print("Secondary screen not detected, setting single")
         screens_single(silent)
 
 
-def screens_rl(silent):
-    screens_detect(False)
+def screens_left(silent):
+    screens_detect(True)
     if values.preferences.screen_secondary != "none":
         cmd = 'xrandr --auto --output ' + values.preferences.screen_secondary + ' --mode ' \
               + values.preferences.secondary_resolution + ' --rate ' \
@@ -431,9 +442,45 @@ def screens_rl(silent):
         if not silent:
             print(cmd)
         os.system(cmd)
-        values.preferences.screens_setup = 'rl'
+        values.preferences.screens_setup = 'left'
         save_preferences()
-        show_hud("screens-rl", "Secondary left", 1500)
+        show_hud("screens-left", "Secondary left", 1500)
+    else:
+        if not silent:
+            print("Secondary screen not detected, setting single")
+        screens_single(silent)
+
+
+def screens_above(silent):
+    screens_detect(True)
+    if values.preferences.screen_secondary != "none":
+        cmd = 'xrandr --auto --output ' + values.preferences.screen_secondary + ' --mode ' \
+              + values.preferences.secondary_resolution + ' --rate ' \
+              + values.preferences.secondary_rate + ' --above ' + values.preferences.screen_primary
+        if not silent:
+            print(cmd)
+        os.system(cmd)
+        values.preferences.screens_setup = 'above'
+        save_preferences()
+        show_hud("screens-above", "Secondary above", 1500)
+    else:
+        if not silent:
+            print("Secondary screen not detected, setting single")
+        screens_single(silent)
+
+
+def screens_below(silent):
+    screens_detect(True)
+    if values.preferences.screen_secondary != "none":
+        cmd = 'xrandr --auto --output ' + values.preferences.screen_secondary + ' --mode ' \
+              + values.preferences.secondary_resolution + ' --rate ' \
+              + values.preferences.secondary_rate + ' --below ' + values.preferences.screen_primary
+        if not silent:
+            print(cmd)
+        os.system(cmd)
+        values.preferences.screens_setup = 'below'
+        save_preferences()
+        show_hud("screens-below", "Secondary below", 1500)
     else:
         if not silent:
             print("Secondary screen not detected, setting single")
@@ -441,7 +488,7 @@ def screens_rl(silent):
 
 
 def screens_clone(silent):
-    screens_detect(False)
+    screens_detect(True)
     if values.preferences.screen_secondary != "none":
         cmd = 'xrandr --auto --output ' + values.preferences.screen_secondary + ' --mode ' \
               + values.preferences.secondary_resolution + ' --rate ' \
@@ -459,7 +506,7 @@ def screens_clone(silent):
 
 
 def screens_single(silent):
-    screens_detect(False)
+    screens_detect(True)
     if values.preferences.screen_secondary != "none":
         cmd = 'xrandr --auto --output ' + values.preferences.screen_secondary + ' --off'
         if not silent:
@@ -482,13 +529,33 @@ def screens_single(silent):
 def screens_switch():
     load_preferences()
     if values.preferences.screens_setup != "none":
-        if values.preferences.screens_setup == 'single':
+        if values.preferences.screens_setup == 'above' or values.preferences.screens_setup == 'below' or values.preferences.screens_setup == 'left':
+            screens_single(True)
+        elif values.preferences.screens_setup == 'single':
             screens_clone(True)
         elif values.preferences.screens_setup == 'clone':
-            screens_lr(True)
-        elif values.preferences.screens_setup == 'lr':
-            screens_rl(True)
-        elif values.preferences.screens_setup == 'rl':
+            screens_right(True)
+        elif values.preferences.screens_setup == 'right':
+            screens_left(True)
+        elif values.preferences.screens_setup == 'left':
+            screens_single(True)
+    else:
+        values.preferences.screens_setup = 'single'
+        save_preferences()
+
+
+def screens_switchv():
+    load_preferences()
+    if values.preferences.screens_setup != "none":
+        if values.preferences.screens_setup == 'left' or values.preferences.screens_setup == 'right' or values.preferences.screens_setup == 'below':
+            screens_single(True)
+        elif values.preferences.screens_setup == 'single':
+            screens_clone(True)
+        elif values.preferences.screens_setup == 'clone':
+            screens_above(True)
+        elif values.preferences.screens_setup == 'above':
+            screens_below(True)
+        elif values.preferences.screens_setup == 'below':
             screens_single(True)
     else:
         values.preferences.screens_setup = 'single'

@@ -1,3 +1,5 @@
+ver_string = "0.1.5"
+
 screen_dimensions = None
 screen_width = None
 screen_height = None

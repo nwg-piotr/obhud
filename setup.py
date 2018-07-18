@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="obhud",
-    version="0.1.4",
+    version="0.1.5",
     author="Piotr Miller",
     author_email="nwg.piotr@gmail.com",
 
@@ -21,5 +21,5 @@ setup(
         'xorg-xbacklight', 'xorg-xrandr', 'libxrandr', 'alsa-utils', 'python', 'python-pmw', 'python-pillow',
         'python-psutil', 'xf86-input-synaptics', 'python-lxml'
     ],
-    latforms=['any'],
+    platforms=['any'],
 )

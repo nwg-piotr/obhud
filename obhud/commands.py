@@ -242,10 +242,10 @@ def config_load():
         config_load()
 
 
-def autoconfig_tint2():
+def autoconfig_tint2(from_menu):
     tint2rc = os.getenv("HOME") + '/.config/tint2/tint2rc'
 
-    if input("\nYou are about to modify the tint2rc file, proceed? (Y/N) ").upper() == "Y":
+    if input("\n You are about to modify the tint2rc file, proceed? (Y/N) ").upper() == "Y":
 
         try:
             with open(tint2rc, 'r') as file:
@@ -268,9 +268,12 @@ def autoconfig_tint2():
                 file.writelines(data)
 
             print("\nTint2 battery and AC commands added to the \'tint2rc\' file,")
-            print("original file renamed to \'tint2rc.bck.obhud\'.\n")
+            print("original file renamed to \'tint2rc.bck.obhud\'.")
 
             os.system('killall -SIGUSR1 tint2 || pkill -SIGUSR1 -x tint2')
+
+            if from_menu:
+                input("\nPress any key... ")
 
         except IOError:
             print("ERROR: couldn\'t open ~/.config/tint2/tint2rc")
@@ -279,8 +282,8 @@ def autoconfig_tint2():
         print("\nAutoconfig Tint2 cancelled.")
 
 
-def autoconfig_keys():
-    if input("\nYou are about to modify the rc.xml file, proceed? (Y/N) ").upper() == "Y":
+def autoconfig_keys(from_menu):
+    if input("\n You are about to modify the rc.xml file, proceed? (Y/N) ").upper() == "Y":
 
         try:
             rcxml = os.getenv("HOME") + '/.config/openbox/rc.xml'
@@ -326,6 +329,9 @@ def autoconfig_keys():
 
             os.system('openbox --reconfigure')
 
+            if from_menu:
+                input("\nPress any key... ")
+
         except:
             print("ERROR: couldn\'t open ~/.config/openbox/rc.xml")
 
@@ -345,9 +351,8 @@ def bind_key(et_item, key, com):
 def autoconfig_all():
     print("\nThis will assign obhud commands and notifications to keys in Openbox rc.xml")
     print("configuration file, and also to AC- and battery-related events in Tint2.")
-    print("See \033[1;34mhttps://github.com/nwg-piotr/obhud\033[0m for details.")
-    autoconfig_keys()
-    autoconfig_tint2()
+    autoconfig_keys(False)
+    autoconfig_tint2(False)
 
 
 class UserPreferences(object):
@@ -431,8 +436,6 @@ def screens_right(silent):
         save_preferences()
         show_hud("screens-right", "Secondary right", 1500)
     else:
-        if not silent:
-            print("Secondary screen not detected, setting single")
         screens_single(silent)
 
 
@@ -449,8 +452,6 @@ def screens_left(silent):
         save_preferences()
         show_hud("screens-left", "Secondary left", 1500)
     else:
-        if not silent:
-            print("Secondary screen not detected, setting single")
         screens_single(silent)
 
 
@@ -467,8 +468,6 @@ def screens_above(silent):
         save_preferences()
         show_hud("screens-above", "Secondary above", 1500)
     else:
-        if not silent:
-            print("Secondary screen not detected, setting single")
         screens_single(silent)
 
 
@@ -485,8 +484,6 @@ def screens_below(silent):
         save_preferences()
         show_hud("screens-below", "Secondary below", 1500)
     else:
-        if not silent:
-            print("Secondary screen not detected, setting single")
         screens_single(silent)
 
 
@@ -503,8 +500,6 @@ def screens_clone(silent):
         save_preferences()
         show_hud("screens-clone", "Clone screen", 1500)
     else:
-        if not silent:
-            print("Secondary screen not detected, setting single")
         screens_single(silent)
 
 

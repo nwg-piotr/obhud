@@ -22,22 +22,16 @@ package in AUR.
 
 ## Quick start
 
+![Terminal](http://nwg.pl/obhud/images/terminal.png)
+
+Type `obhud` in terminal to access the menu, which allows to add 
+default keybindings to `rc.xml` and commands to `tint2rc` file 
+automatically. You'll also find syntax of each command here.
+
 **CAUTION:** 
 *I did my best to test the script and make sure it's safe. However, the `--autoconfig`
 options make changes to essential system configuration files. Making backups of
 `~/.config/openbox/rc.xml` and `~/.config/tint2/tint2rc` files is recommended.*
-
-If you have [Tint2](https://gitlab.com/o9000/tint2) installed, just enter one command in terminal:
-````
-obhud --autoconfig all
-````
-This will add all the necessary keybindings in `~/home/config/openbox/rc.xml`
-and configure Tint2 AC- and battery-related commands in `~/home/config/tint2/tint2rc`.
-
-Otherwise, you can only make keybindings in the `rc.xml` file with
-````
-obhud --autoconfig keys
-````
 
 For more info [check Wiki](https://github.com/nwg-piotr/obhud/wiki/Openbox-HUD-Wiki).
 

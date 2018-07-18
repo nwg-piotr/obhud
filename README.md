@@ -19,11 +19,11 @@ package in AUR.
 
 ## Quick start
 
-![Terminal](http://nwg.pl/obhud/images/terminal.png)
-
 Type `obhud` in terminal to access the menu, which allows to add 
 default keybindings to `rc.xml` and commands to `tint2rc` file 
 automatically. You'll also find syntax of each command here.
+
+![Terminal](http://nwg.pl/obhud/images/terminal.png)
 
 **CAUTION:** 
 *I did my best to test the script and make sure it's safe. However, the `--autoconfig`

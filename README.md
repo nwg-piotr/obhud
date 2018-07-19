@@ -3,15 +3,12 @@
 This script is intended to simplify assigning 
 laptop-specific keys and events to actions and display ~~slightly gnomish~~
 graphical messages in [Openbox](http://openbox.org) window manager. 
-This way one can, for instance, change volume level or screen brightness 
-and see a graphical confirmation by just binding a key to a single 
-command. Furthermore - assigning a command in [Tint2](https://gitlab.com/o9000/tint2) 
+This way one can, for instance, change volume level or screen brightness,
+or switch primary / secondary display **(new!)** and see a graphical confirmation 
+by just binding a key to a single command. 
+Furthermore - assigning a command in [Tint2](https://gitlab.com/o9000/tint2) 
 preferences allows to see alerts concerning the AC and
 battery state, and also suspend on critical battery level.
-
-**New in 0.1.4 version:**
-
-Switching primary/secondary display added. Please run `obhud --autoconfig keys` or add keybindings manually.
 
 ![preview](http://nwg.pl/obhud/images/preview1.png)
 
@@ -22,22 +19,16 @@ package in AUR.
 
 ## Quick start
 
+Type `obhud` in terminal to access the menu, which allows to add 
+default keybindings to `rc.xml` and commands to `tint2rc` file 
+automatically. You'll also find syntax of each command here.
+
+![Terminal](http://nwg.pl/obhud/images/terminal.png)
+
 **CAUTION:** 
 *I did my best to test the script and make sure it's safe. However, the `--autoconfig`
 options make changes to essential system configuration files. Making backups of
 `~/.config/openbox/rc.xml` and `~/.config/tint2/tint2rc` files is recommended.*
-
-If you have [Tint2](https://gitlab.com/o9000/tint2) installed, just enter one command in terminal:
-````
-obhud --autoconfig all
-````
-This will add all the necessary keybindings in `~/home/config/openbox/rc.xml`
-and configure Tint2 AC- and battery-related commands in `~/home/config/tint2/tint2rc`.
-
-Otherwise, you can only make keybindings in the `rc.xml` file with
-````
-obhud --autoconfig keys
-````
 
 For more info [check Wiki](https://github.com/nwg-piotr/obhud/wiki/Openbox-HUD-Wiki).
 

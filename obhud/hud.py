@@ -44,10 +44,15 @@ def main():
         done = False
 
         while not done:
+            rcmxl_exists = os.path.isfile(os.getenv("HOME") + '/.config/openbox/rc.xml')
+            tint2rc_exists = os.path.isfile(os.getenv("HOME") + '/.config/tint2/tint2rc')
+
             print_header()
             print(" 1. Commands help")
-            print(" 2. Autoconfig keybindings")
-            print(" 3. Autoconfig Tint2")
+            if rcmxl_exists:
+                print(" 2. Autoconfig keybindings")
+            if tint2rc_exists:
+                print(" 3. Autoconfig Tint2")
             print(" 0. Exit")
 
             i = input("\n Select action, press enter: ")

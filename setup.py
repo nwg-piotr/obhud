@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="obhud",
-    version="0.1.5",
+    version="0.1.7",
     author="Piotr Miller",
     author_email="nwg.piotr@gmail.com",
 
@@ -19,7 +19,7 @@ setup(
     long_description=open("README.txt").read(),
     install_requires=[
         'xorg-xbacklight', 'xorg-xrandr', 'libxrandr', 'alsa-utils', 'python', 'python-pmw', 'python-pillow',
-        'python-psutil', 'xf86-input-synaptics', 'python-lxml'
+        'python-psutil', 'xf86-input-synaptics','ffmpeg', 'python-lxml'
     ],
     platforms=['any'],
 )

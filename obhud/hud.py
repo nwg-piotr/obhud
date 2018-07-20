@@ -80,7 +80,7 @@ def main():
             print("Unknown command \'" + sys.argv[2] + "\'")
 
     elif sys.argv[1] == "--battery":
-        if sys.argv[2] == "low" or sys.argv[2] == "full":
+        if sys.argv[2] == "low" or sys.argv[2] == "LOW" or sys.argv[2] == "full":
             battery(sys.argv[2])
         else:
             print("Unknown command \'" + sys.argv[2] + "\'")

@@ -1,4 +1,5 @@
 import os
+import subprocess
 import pickle
 
 from tkinter import Tk, Frame, Canvas
@@ -39,6 +40,10 @@ class Hud(Tk):
         self.canvas.create_text(values.hud_side / 2, int(190 * values.hud_scale),
                                 font="Helvetica" + str(int(14 * values.hud_scale)),
                                 text=message, fill='light gray')
+
+
+def play_sound(audio_file):
+    subprocess.call(["ffplay", "-nodisp", "-autoexit", "icons/" + audio_file])
 
 
 def show_hud(icon, message, timeout):
@@ -142,6 +147,10 @@ def touchpad(command):
 
 def battery(command):
     if command == "low":
+        show_hud("battery-low", "Battery low", 10000)
+        os.system('systemctl suspend')
+    elif command == "LOW":
+        play_sound("battery-low.mp3")
         show_hud("battery-low", "Battery low", 10000)
         os.system('systemctl suspend')
     elif command == "full":
@@ -256,7 +265,7 @@ def autoconfig_tint2(from_menu):
                 for i in range(len(data)):
                     row = data[i]
                     if row.startswith('battery_low_cmd'):
-                        data[i] = "battery_low_cmd = obhud --battery low\n"
+                        data[i] = "battery_low_cmd = obhud --battery LOW\n"
                     elif row.startswith('battery_full_cmd'):
                         data[i] = "battery_full_cmd = obhud --battery full\n"
                     elif row.startswith('ac_connected_cmd'):

@@ -13,7 +13,7 @@ battery state, and also suspend on critical battery level.
 ### New in 0.1.7 version
 
 Sound added to the **battery low** notification. Launch `obhuh --autoconfig tint2` or just
-replace `obhud --battery low` with `obhud --battery LOW` in Tint2 / Battery alert to hear 
+replace `obhud --battery low` with `obhud --battery LOW` in Tint2 / Battery alert, to hear 
 sound before the notification and suspending the system.
 
 ![preview](http://nwg.pl/obhud/images/preview1.png)

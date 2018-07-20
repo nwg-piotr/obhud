@@ -12,7 +12,7 @@ source=("https://github.com/nwg-piotr/obhud/raw/master/dist/obhud-0.1.7.tar.gz"
 "https://github.com/nwg-piotr/obhud/raw/master/dist/obhud"
 "https://github.com/nwg-piotr/obhud/raw/master/dist/obhud.conf")
 
-md5sums=('f39dfc23fa2cc51a6ee5da67e8362a7a'
+md5sums=('1f627a99402ae13c5d475cbccdca8a46'
          '5b26cb8e7fff160d1eccc183e8ae2d28'
          '4429cf48928bf71e761df0f9b7dcbd8a')
 

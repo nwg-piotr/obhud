@@ -4,11 +4,17 @@ This script is intended to simplify assigning
 laptop-specific keys and events to actions and display ~~slightly gnomish~~
 graphical messages in [Openbox](http://openbox.org) window manager. 
 This way one can, for instance, change volume level or screen brightness,
-or switch primary / secondary display **(new!)** and see a graphical confirmation 
+or switch primary / secondary display and see a graphical confirmation 
 by just binding a key to a single command. 
 Furthermore - assigning a command in [Tint2](https://gitlab.com/o9000/tint2) 
 preferences allows to see alerts concerning the AC and
 battery state, and also suspend on critical battery level.
+
+### New in 0.1.7 version
+
+Sound added to the **battery low** notification. Launch `obhuh --autoconfig tint2` or just
+replace `obhud --battery low` with `obhud --battery LOW` in Tint2 / Battery alert to hear 
+sound before the notification and suspending the system.
 
 ![preview](http://nwg.pl/obhud/images/preview1.png)
 

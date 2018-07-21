@@ -20,7 +20,7 @@ def print_help():
     print(" Commands help:\n")
     print(" --volume {up} | {down} | {toggle}")
     print(" --brightness {up} | {down}")
-    print(" --battery {low} | {full}")
+    print(" --battery {low} | {LOW} | {full}")
     print(" --ac {connected} | {disconnected}")
     print(" --touchpad {toggle} | {on} | {off}")
     print(" --autoconfig {keys} | {tint2} | {all}")

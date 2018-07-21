@@ -1,4 +1,4 @@
-ver_string = "0.1.5"
+ver_string = "0.1.7"
 
 screen_dimensions = None
 screen_width = None

@@ -1,4 +1,4 @@
 
 #!/bin/sh
-cd /usr/lib/python3.6/site-packages/obhud
+cd /usr/lib/python3.7/site-packages/obhud
 exec python obhud.py "$@"

@@ -35,7 +35,7 @@ def main():
 
     values.preferences_file = os.getenv("HOME") + "/.config/obhud/preferences.pkl"
 
-    timer_file = os.getenv("HOME") + "/.config/obhud/timer"
+    timer_file = os.getenv("HOME") + "/.config/obhud/timer.sh"
     if not os.path.isfile(timer_file):
         os.system('echo 00:00:00 > ' + timer_file)
 

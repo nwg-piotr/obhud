@@ -1,4 +1,3 @@
-
 #!/bin/sh
 cd /usr/lib/python3.7/site-packages/obhud
 exec python timer.py "$@"

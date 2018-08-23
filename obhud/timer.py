@@ -12,7 +12,7 @@ def main():
 
         try:
             seconds = int(sys.argv[1])
-            os.system('cp -rf /etc/obhud/timer.sh ~/.config/timer.sh')
+            os.system('cp -rf /etc/obhud/timer.sh ~/.config/obhud/timer.sh')
             countdown(seconds)
 
         except ValueError:

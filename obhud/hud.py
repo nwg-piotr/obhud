@@ -35,10 +35,6 @@ def main():
 
     values.preferences_file = os.getenv("HOME") + "/.config/obhud/preferences.pkl"
 
-    timer_file = os.getenv("HOME") + "/.config/obhud/timer.sh"
-    if not os.path.isfile(timer_file):
-        os.system('echo 00:00:00 > ' + timer_file)
-
     check_dimensions()
 
     if len(sys.argv) <= 2 or sys.argv[1] != "--volume" and sys.argv[1] != "--brightness" and sys.argv[

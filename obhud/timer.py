@@ -18,6 +18,8 @@ def main():
         except ValueError:
             print("Not a number: " + sys.argv[1])
 
+        exit(0)
+
 
 def countdown(seconds):
     finish_at = int(time.time()) + seconds

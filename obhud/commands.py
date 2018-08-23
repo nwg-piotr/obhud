@@ -28,6 +28,7 @@ class Hud(Tk):
         self.frame.pack()
         self.canvas = Canvas(self.frame, bg="gray16", width=values.hud_side, height=values.hud_side,
                              highlightthickness=1, highlightbackground="gray30")
+        self.canvas.bind("<Button-1>", self.callback)
         self.canvas.pack()
 
         self.overrideredirect(1)
@@ -40,6 +41,9 @@ class Hud(Tk):
         self.canvas.create_text(values.hud_side / 2, int(190 * values.hud_scale),
                                 font="Helvetica" + str(int(14 * values.hud_scale)),
                                 text=message, fill='light gray')
+
+    def callback(self, event):
+        self.destroy()
 
 
 def play_sound(audio_file):
@@ -162,6 +166,12 @@ def ac(command):
         show_hud("ac-connected", "AC connected", 1500)
     elif command == "disconnected":
         show_hud("ac-disconnected", "AC disconnected", 1500)
+
+
+def timer(command):
+    if command == "ring":
+        play_sound("timer.mp3")
+        show_hud("timer", "Time out", 30000)
 
 
 def screens(command):

@@ -2,7 +2,7 @@ import sys
 import os
 import values
 
-from commands import volume, brightness, battery, ac, touchpad, check_dimensions, config_load, autoconfig_tint2, \
+from commands import volume, brightness, battery, ac, touchpad, timer, check_dimensions, config_load, autoconfig_tint2, \
     autoconfig_keys, autoconfig_all, screens, load_preferences, create_preferences
 
 
@@ -35,11 +35,15 @@ def main():
 
     values.preferences_file = os.getenv("HOME") + "/.config/obhud/preferences.pkl"
 
+    timer_file = os.getenv("HOME") + "/.config/obhud/timer"
+    if not os.path.isfile(timer_file):
+        os.system('echo 00:00:00 > ' + timer_file)
+
     check_dimensions()
 
     if len(sys.argv) <= 2 or sys.argv[1] != "--volume" and sys.argv[1] != "--brightness" and sys.argv[
         1] != "--battery" and sys.argv[1] != "--ac" and sys.argv[1] != "--touchpad" and sys.argv[
-        1] != "--autoconfig" and sys.argv[1] != "--screens":
+        1] != "--autoconfig" and sys.argv[1] != "--screens" and sys.argv[1] != "--timer":
 
         done = False
 
@@ -66,6 +70,12 @@ def main():
                 done = True
 
         sys.exit(0)
+
+    elif sys.argv[1] == "--timer":
+        if sys.argv[2] == "ring":
+            timer(sys.argv[2])
+        else:
+            print("Unknown command \'" + sys.argv[2] + "\'")
 
     elif sys.argv[1] == "--volume":
         if sys.argv[2] == "up" or sys.argv[2] == "down" or sys.argv[2] == "toggle":

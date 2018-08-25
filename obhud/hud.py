@@ -2,7 +2,7 @@ import sys
 import os
 import values
 
-from commands import volume, brightness, battery, ac, touchpad, timer, check_dimensions, config_load, autoconfig_tint2, \
+from commands import volume, brightness, battery, ac, touchpad, alarm, check_dimensions, config_load, autoconfig_tint2, \
     autoconfig_keys, autoconfig_all, screens, load_preferences, create_preferences
 
 
@@ -39,7 +39,7 @@ def main():
 
     if len(sys.argv) <= 2 or sys.argv[1] != "--volume" and sys.argv[1] != "--brightness" and sys.argv[
         1] != "--battery" and sys.argv[1] != "--ac" and sys.argv[1] != "--touchpad" and sys.argv[
-        1] != "--autoconfig" and sys.argv[1] != "--screens" and sys.argv[1] != "--timer":
+        1] != "--autoconfig" and sys.argv[1] != "--screens" and sys.argv[1] != "--alarm":
 
         done = False
 
@@ -67,11 +67,11 @@ def main():
 
         sys.exit(0)
 
-    elif sys.argv[1] == "--timer":
-        if sys.argv[2] == "ring":
-            timer(sys.argv[2])
+    elif sys.argv[1] == "--alarm":
+        if sys.argv[2] == "timer":
+            alarm("Time out, click me!")
         else:
-            print("Unknown command \'" + sys.argv[2] + "\'")
+            alarm("Some alarm")
 
     elif sys.argv[1] == "--volume":
         if sys.argv[2] == "up" or sys.argv[2] == "down" or sys.argv[2] == "toggle":

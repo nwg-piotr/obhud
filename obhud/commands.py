@@ -43,11 +43,13 @@ class Hud(Tk):
                                 text=message, fill='light gray')
 
     def callback(self, event):
+        os.system('pkill -9 -f \'ffplay\'')
         self.destroy()
 
 
 def play_sound(audio_file):
-    subprocess.call(["ffplay", "-nodisp", "-autoexit", "icons/" + audio_file])
+    subprocess.Popen(["nohup", "ffplay", "-loop", "8", "-nodisp", "-autoexit", "icons/" + audio_file],
+                     stdout=open('/dev/null', 'w'))
 
 
 def show_hud(icon, message, timeout):
@@ -163,15 +165,15 @@ def battery(command):
 
 def ac(command):
     if command == "connected":
+        os.system('pkill -9 -f \'ffplay\'')
         show_hud("ac-connected", "AC connected", 1500)
     elif command == "disconnected":
         show_hud("ac-disconnected", "AC disconnected", 1500)
 
 
-def timer(command):
-    if command == "ring":
-        play_sound("timer.mp3")
-        show_hud("timer", "Time out", 30000)
+def alarm(message):
+    play_sound("timer.mp3")
+    show_hud("timer", message, 30000)
 
 
 def screens(command):
@@ -206,7 +208,7 @@ def screens(command):
 def measure_screen():
     os.system('xrandr | grep \'*\' > ~/tmp')
     resolution_string = open(values.tmp, 'r').read()
-    os.remove(values.tmp)
+    # os.remove(values.tmp)
 
     resolution = resolution_string.split()[0]
     width, height = resolution.split('x')
@@ -264,6 +266,8 @@ def config_load():
 def autoconfig_tint2(from_menu):
     tint2rc = os.getenv("HOME") + '/.config/tint2/tint2rc'
 
+    timer_found = False
+
     if os.path.isfile(tint2rc):
 
         if input("\n You are about to modify the tint2rc file, proceed? (Y/N) ").upper() == "Y":
@@ -282,6 +286,32 @@ def autoconfig_tint2(from_menu):
                         data[i] = "ac_connected_cmd = obhud --ac connected\n"
                     elif row.startswith('ac_disconnected_cmd'):
                         data[i] = "ac_disconnected_cmd = obhud --ac disconnected\n"
+
+                    if not timer_found and row.find("obhud/timer.sh") >= 0:
+                        timer_found = True
+
+                if not timer_found:
+                    data.append("\n#-------------------------------------\n")
+                    data.append("# Executor 99\n")
+                    data.append("execp = new\n")
+                    data.append("execp_command = ~/.config/obhud/timer.sh\n")
+                    data.append("execp_interval = 1\n")
+                    data.append("execp_has_icon = 0\n")
+                    data.append("execp_cache_icon = 0\n")
+                    data.append("execp_continuous = 0\n")
+                    data.append("execp_markup = 0\n")
+                    data.append("execp_tooltip =\n")
+                    data.append("execp_lclick_command = obhud --timer gui\n")
+                    data.append("execp_rclick_command =\n")
+                    data.append("execp_mclick_command =\n")
+                    data.append("execp_uwheel_command =\n")
+                    data.append("execp_dwheel_command =\n")
+                    data.append("execp_font_color = #ffffff 100\n")
+                    data.append("execp_padding = 0 0\n")
+                    data.append("execp_background_id = 5\n")
+                    data.append("execp_centered = 1\n")
+                    data.append("execp_icon_w = 0\n")
+                    data.append("execp_icon_h = 0\n")
 
                 os.system('mv -f ' + tint2rc + ' ' + tint2rc + '.bck.obhud')
 
@@ -347,7 +377,8 @@ def autoconfig_keys(from_menu):
 
                 os.system('mv -f ' + rcxml + ' ' + rcxml + '.bck.obhud')
 
-                tree.write(rcxml, encoding='utf-8', with_tail=True, xml_declaration=True, method='xml', pretty_print=True)
+                tree.write(rcxml, encoding='utf-8', with_tail=True, xml_declaration=True, method='xml',
+                           pretty_print=True)
 
                 print("\n Key bindings added to the \'rc.xml\' file.")
                 print(" Original file renamed to \'rc.xml.bck.obhud\'.\n")
@@ -447,7 +478,8 @@ def screens_detect(silent):
 
     if not silent:
         print(values.preferences.screen_primary, end="")
-        print(" | " + values.preferences.screen_secondary + " " + values.preferences.secondary_resolution + " " + values.preferences.secondary_rate)
+        print(
+            " | " + values.preferences.screen_secondary + " " + values.preferences.secondary_resolution + " " + values.preferences.secondary_rate)
 
 
 def screens_right(silent):
@@ -585,4 +617,3 @@ def screens_switchv():
     else:
         values.preferences.screens_setup = 'single'
         save_preferences()
-

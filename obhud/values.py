@@ -24,3 +24,5 @@ preferences_file = ""
 preferences = None
 screen_primary = ""
 screen_secondary = ""
+
+dialog_action = None

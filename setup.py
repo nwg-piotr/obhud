@@ -19,7 +19,7 @@ setup(
     long_description=open("README.txt").read(),
     install_requires=[
         'xorg-xbacklight', 'xorg-xrandr', 'libxrandr', 'alsa-utils', 'python', 'python-pmw', 'python-pillow',
-        'python-psutil', 'xf86-input-synaptics','ffmpeg', 'python-lxml'
+        'xf86-input-synaptics','ffmpeg', 'python-lxml'
     ],
     platforms=['any'],
 )

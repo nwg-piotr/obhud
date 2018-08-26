@@ -3,6 +3,7 @@ import os
 from tkinter import *
 import values
 from commands import check_dimensions
+from PIL import Image, ImageTk
 
 timer_file = os.getenv("HOME") + "/.config/obhud/timer.sh"
 
@@ -11,6 +12,11 @@ class Dialog(Tk):
     def __init__(self):
         super().__init__()
         self.title("Obhud: Timer & Stopwatch")
+
+        image = Image.open('icons/icon.png')
+        img = ImageTk.PhotoImage(image)
+        self.tk.call('wm', 'iconphoto', self._w, img)
+
         self.geometry("+%d+%d" % (
             int(values.screen_width / 2 - values.hud_side / 2),
             int(values.screen_height - values.hud_side - values.hud_margin_v)))

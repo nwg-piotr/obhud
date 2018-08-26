@@ -19,8 +19,8 @@ def main():
 
         else:
             subprocess.call(["pkill", "-9", "-f", "python timer.py"])
-            subprocess.Popen(["nohup", "python", "timer.py", sys.argv[2]], stdout=open('/dev/null', 'w'))
-            #subprocess.call(["python", "timer.py", sys.argv[2]])
+            #subprocess.Popen(["nohup", "python", "timer.py", sys.argv[2]], stdout=open('/dev/null', 'w'))
+            subprocess.call(["python", "timer.py", sys.argv[2]])
     else:
         subprocess.call(["python", "hud.py"])
 

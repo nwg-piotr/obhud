@@ -306,6 +306,7 @@ def autoconfig_tint2(from_menu):
                     data.append("execp_mclick_command =\n")
                     data.append("execp_uwheel_command =\n")
                     data.append("execp_dwheel_command =\n")
+                    data.append("execp_font = Cantarell 9\n")
                     data.append("execp_font_color = #ffffff 100\n")
                     data.append("execp_padding = 0 0\n")
                     data.append("execp_background_id = 5\n")

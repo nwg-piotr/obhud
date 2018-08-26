@@ -1,4 +1,5 @@
 ver_string = "0.1.8"
+whatsnew = " *** NEW: Timer/Stopwatch *** Run --autoconfig tint2 to add the executor"
 
 screen_dimensions = None
 screen_width = None

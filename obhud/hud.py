@@ -12,6 +12,7 @@ def print_header():
     print(" Openbox HUD " + values.ver_string)
     print(" Script for handling laptop-specific keys and events in Openbox window manager")
     print(" Website: \033[1;34mhttps://github.com/nwg-piotr/obhud\033[0m")
+    print(values.whatsnew)
     print("-------------------------------------------------------------------------------\n")
 
 

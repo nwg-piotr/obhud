@@ -40,7 +40,7 @@ Alternatively you can use the `obhud --autoconfig all` command.
 **CAUTION:** 
 *I did my best to test the script and make sure it's safe. However, the `--autoconfig`
 options make changes to essential system configuration files. Making backups of
-`~/.config/openbox/rc.xml` and `~/.config/tint2/tint2rc` files is recommended.*
+`~/.config/openbox/rc.xml` and `~/.config/tint2/tint2rc` files is recommendable.*
 
 For more info [check Wiki](https://github.com/nwg-piotr/obhud/wiki/Openbox-HUD-Wiki).
 

@@ -320,10 +320,9 @@ def autoconfig_tint2(from_menu):
 
                         for i in range(len(data)):
                             row = data[i]
+                            # Add the executor to panel items
                             if row.startswith('panel_items'):
-                                print("Panel items old: " + data[i])
                                 data[i] = row[:-1] + "E\n"
-                                print("Panel items new: " + data[i])
 
                 # backup the current file
                 os.system('mv -f ' + tint2rc + ' ' + tint2rc + '.bck.obhud')

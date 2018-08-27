@@ -287,33 +287,45 @@ def autoconfig_tint2(from_menu):
                     elif row.startswith('ac_disconnected_cmd'):
                         data[i] = "ac_disconnected_cmd = obhud --ac disconnected\n"
 
+                    # Check for existence of the Timer executor
                     if not timer_found and row.find("obhud/timer.sh") >= 0:
                         timer_found = True
 
+                # Append the Timer executor on the very end
                 if not timer_found:
-                    data.append("\n#-------------------------------------\n")
-                    data.append("# Executor 99\n")
-                    data.append("execp = new\n")
-                    data.append("execp_command = ~/.config/obhud/timer.sh\n")
-                    data.append("execp_interval = 1\n")
-                    data.append("execp_has_icon = 0\n")
-                    data.append("execp_cache_icon = 0\n")
-                    data.append("execp_continuous = 0\n")
-                    data.append("execp_markup = 0\n")
-                    data.append("execp_tooltip =\n")
-                    data.append("execp_lclick_command = obhud --timer gui\n")
-                    data.append("execp_rclick_command =\n")
-                    data.append("execp_mclick_command =\n")
-                    data.append("execp_uwheel_command =\n")
-                    data.append("execp_dwheel_command =\n")
-                    data.append("execp_font = Cantarell 9\n")
-                    data.append("execp_font_color = #ffffff 100\n")
-                    data.append("execp_padding = 0 0\n")
-                    data.append("execp_background_id = 5\n")
-                    data.append("execp_centered = 1\n")
-                    data.append("execp_icon_w = 0\n")
-                    data.append("execp_icon_h = 0\n")
 
+                    if input("\n Add the Timer/Stopwatch executor? (Y/N) ").upper() == "Y":
+                        data.append("\n#-------------------------------------\n")
+                        data.append("# Executor 99\n")
+                        data.append("execp = new\n")
+                        data.append("execp_command = ~/.config/obhud/timer.sh\n")
+                        data.append("execp_interval = 1\n")
+                        data.append("execp_has_icon = 0\n")
+                        data.append("execp_cache_icon = 0\n")
+                        data.append("execp_continuous = 0\n")
+                        data.append("execp_markup = 0\n")
+                        data.append("execp_tooltip =\n")
+                        data.append("execp_lclick_command = obhud --timer gui\n")
+                        data.append("execp_rclick_command =\n")
+                        data.append("execp_mclick_command =\n")
+                        data.append("execp_uwheel_command =\n")
+                        data.append("execp_dwheel_command =\n")
+                        data.append("execp_font = Cantarell 8\n")
+                        data.append("execp_font_color = #ffffff 100\n")
+                        data.append("execp_padding = 0 0\n")
+                        data.append("execp_background_id = 5\n")
+                        data.append("execp_centered = 1\n")
+                        data.append("execp_icon_w = 0\n")
+                        data.append("execp_icon_h = 0\n")
+
+                        for i in range(len(data)):
+                            row = data[i]
+                            if row.startswith('panel_items'):
+                                print("Panel items old: " + data[i])
+                                data[i] = row[:-1] + "E\n"
+                                print("Panel items new: " + data[i])
+
+                # backup the current file
                 os.system('mv -f ' + tint2rc + ' ' + tint2rc + '.bck.obhud')
 
                 with open(tint2rc, 'w') as file:

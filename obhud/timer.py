@@ -128,7 +128,7 @@ def stopwatch():
 
 
 def timer_clear():
-    os.system("echo -e \"printf \'%8s\n%8s \' Timer not-set\"" + ' > ' + timer_file)
+    os.system('cp -rf icons/timer.svg ~/.config/obhud/timer.svg')
     values.timer_active = False
 
 

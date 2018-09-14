@@ -10,6 +10,12 @@ Furthermore - assigning a command in [Tint2](https://gitlab.com/o9000/tint2)
 preferences allows to see alerts concerning the AC and
 battery state, and also suspend on critical battery level.
 
+### New in 0.1.9 version
+
+**Timer/Stopwatch icon**. Please check "Show icons" checkbox in the relevant Tint2 executor. 
+Or you can set `execp_has_icon` to `1` in the tnt2rc file. If the executor has not yet
+been added, running `obhud --autoconfig tint2` will do the job.
+
 ### New in 0.1.8 version
 
 **Timer/Stopwatch added**. Please run `obhud --autoconfig tint2` to add the executor.

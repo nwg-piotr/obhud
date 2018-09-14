@@ -109,7 +109,7 @@ def countdown(seconds):
     finish_at = int(time.time()) + seconds
 
     while int(time.time()) <= finish_at:
-        os.system("echo -e \"printf \'%8s\n%8s \' Timer: \"" + formatted_time(
+        os.system("echo -e \"printf " + formatted_time(
             finish_at - int(time.time())) + ' > ' + timer_file)
         time.sleep(1)
 
@@ -122,7 +122,7 @@ def stopwatch():
     started_at = int(time.time())
 
     while not done:
-        os.system("echo -e \"printf \'%8s\n%8s \' Stopwatch: \"" + formatted_time(
+        os.system("echo -e " + formatted_time(
             int(time.time()) - started_at) + ' > ' + timer_file)
         time.sleep(1)
 

@@ -109,7 +109,7 @@ def countdown(seconds):
     finish_at = int(time.time()) + seconds
 
     while int(time.time()) <= finish_at:
-        os.system("echo -e \"printf " + formatted_time(
+        os.system("echo -e printf " + formatted_time(
             finish_at - int(time.time())) + ' > ' + timer_file)
         time.sleep(1)
 

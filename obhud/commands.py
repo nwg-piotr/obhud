@@ -300,7 +300,7 @@ def autoconfig_tint2(from_menu):
                         data.append("execp = new\n")
                         data.append("execp_command = ~/.config/obhud/timer.sh\n")
                         data.append("execp_interval = 1\n")
-                        data.append("execp_has_icon = 0\n")
+                        data.append("execp_has_icon = 1\n")
                         data.append("execp_cache_icon = 0\n")
                         data.append("execp_continuous = 0\n")
                         data.append("execp_markup = 0\n")

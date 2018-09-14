@@ -88,7 +88,7 @@ def main():
             elif unit != 's':
                 raise ValueError()
 
-            os.system('cp -rf /etc/obhud/timer.svg ~/.config/obhud/timer.svg')
+            os.system('cp -rf /etc/obhud/timer.sh ~/.config/obhud/timer.sh')
             if seconds > 0:
                 # Start Timer on any positive value
                 countdown(seconds)
@@ -128,7 +128,7 @@ def stopwatch():
 
 
 def timer_clear():
-    os.system('cp -rf icons/timer.svg ~/.config/obhud/timer.svg')
+    os.system('cp -rf /etc/obhud/timer.sh ~/.config/obhud/timer.sh')
     values.timer_active = False
 
 

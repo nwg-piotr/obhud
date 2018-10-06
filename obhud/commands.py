@@ -1,3 +1,19 @@
+"""
+Obhud - a script for handling laptop-specific keys and events in Openbox Window Manager
+
+Author: Piotr Miller
+e-mail: nwg.piotr@gmail.com
+website: http://nwg.pl
+
+Project: https://github.com/nwg-piotr/obhud
+
+Obhud is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation, either version 3 of the License, or any later version.
+
+Obhud is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+"""
+
 import os
 import subprocess
 import pickle
@@ -220,7 +236,7 @@ def screens(command):
 def measure_screen():
     os.system('xrandr | grep \'*\' > ~/tmp')
     resolution_string = open(values.tmp, 'r').read()
-    # os.remove(values.tmp)
+    os.remove(values.tmp)
 
     resolution = resolution_string.split()[0]
     width, height = resolution.split('x')

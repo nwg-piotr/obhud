@@ -339,6 +339,8 @@ def autoconfig_tint2(from_menu):
                             if row.startswith('panel_items'):
                                 data[i] = row[:-1] + "E\n"
 
+                        os.system('cp -rf icons/timer.svg ~/.config/obhud/timer.svg')
+
                 # backup the current file
                 os.system('mv -f ' + tint2rc + ' ' + tint2rc + '.bck.obhud')
 

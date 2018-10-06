@@ -61,8 +61,6 @@ def main():
 
     check_dimensions()
 
-    os.system('cp -rf icons/timer.svg ~/.config/obhud/timer.svg')
-
     if len(sys.argv) > 1:
 
         argument = sys.argv[1]

@@ -10,6 +10,11 @@ Furthermore - assigning a command in [Tint2](https://gitlab.com/o9000/tint2)
 preferences allows to see alerts concerning the AC and
 battery state, and also suspend on critical battery level.
 
+### New in 0.2.1 version
+
+**Optional use of the [light-git](https://aur.archlinux.org/packages/light-git) (AUR) package**. 
+If brightness keys don't work for you (e.g. with Radeon graphics), please install optional `light-git` package. 
+
 ### New in 0.1.9 version
 
 **Timer/Stopwatch icon**. Please check "Show icons" checkbox in the relevant Tint2 executor. 

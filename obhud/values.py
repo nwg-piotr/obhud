@@ -18,6 +18,8 @@ volume_toggle = ''
 
 brightness_up = ''
 brightness_down = ''
+light_increase = ''
+light_decrease = ''
 touchpad_on = ''
 touchpad_off = ''
 
@@ -27,3 +29,5 @@ screen_primary = ""
 screen_secondary = ""
 
 dialog_action = None
+
+light_installed = False

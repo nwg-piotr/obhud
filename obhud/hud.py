@@ -38,6 +38,11 @@ def main():
 
     check_dimensions()
 
+    # Check if the `light` package installed (light-git from AUR)
+    os.system("which light > ~/tmp")
+    values.light_installed = open(values.tmp, 'r').read().rstrip() == "/usr/bin/light"
+    os.remove(values.tmp)
+
     if len(sys.argv) <= 2 or sys.argv[1] != "--volume" and sys.argv[1] != "--brightness" and sys.argv[
         1] != "--battery" and sys.argv[1] != "--ac" and sys.argv[1] != "--touchpad" and sys.argv[
         1] != "--autoconfig" and sys.argv[1] != "--screens" and sys.argv[1] != "--alarm":

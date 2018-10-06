@@ -15,6 +15,7 @@ volume_get_level = 'amixer sget Master | grep \'Right:\' | awk -F\'[][]\' \'{ pr
 volume_get_status = 'amixer sget Master | grep \'Right:\' | awk -F\'[][]\' \'{ print $4 }\' > ~/tmp'
 
 brightness_get_level = 'xbacklight -get > ~/tmp'
+light_get_brightness = 'light -G > ~/tmp'
 
 touchpad_get_status = 'synclient -l | grep TouchpadOff | awk \'{print $3}\' > ~/tmp'
 
@@ -98,12 +99,23 @@ def volume(command):
 
 
 def brightness(command):
+    # We will use the optional light-git package if installed or xbacklight if not
     if command == "up":
-        os.system(values.brightness_up)
+        if values.light_installed:
+            os.system(values.light_increase)
+        else:
+            os.system(values.brightness_up)
     elif command == "down":
-        os.system(values.brightness_down)
+        if values.light_installed:
+            os.system(values.light_decrease)
+        else:
+            os.system(values.brightness_down)
 
-    os.system(brightness_get_level)
+    if values.light_installed:
+        os.system(light_get_brightness)
+    else:
+        os.system(brightness_get_level)
+
     brightness_lvl = open(values.tmp, 'r').read()
     os.remove(values.tmp)
 
@@ -242,6 +254,8 @@ def config_load():
                     and config.has_option("Commands", "volume_toggle") \
                     and config.has_option("Commands", "brightness_up") \
                     and config.has_option("Commands", "brightness_down") \
+                    and config.has_option("Commands", "light_increase") \
+                    and config.has_option("Commands", "light_decrease") \
                     and config.has_option("Commands", "touchpad_on") \
                     and config.has_option("Commands", "touchpad_off"):
 
@@ -250,10 +264,11 @@ def config_load():
                 values.volume_toggle = config.get("Commands", "volume_toggle")
                 values.brightness_up = config.get("Commands", "brightness_up")
                 values.brightness_down = config.get("Commands", "brightness_down")
+                values.light_increase = config.get("Commands", "light_increase")
+                values.light_decrease = config.get("Commands", "light_decrease")
                 values.touchpad_on = config.get("Commands", "touchpad_on")
                 values.touchpad_off = config.get("Commands", "touchpad_off")
 
-                # print("config loaded from ~/.config/obhud/obhud.conf")
             else:
                 raise IOError('Missing configuration key')
 

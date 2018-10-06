@@ -31,3 +31,4 @@ screen_secondary = ""
 dialog_action = None
 
 light_installed = False
+tint2_installed = False

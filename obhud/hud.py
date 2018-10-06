@@ -43,6 +43,11 @@ def main():
     values.light_installed = open(values.tmp, 'r').read().rstrip() == "/usr/bin/light"
     os.remove(values.tmp)
 
+    # Check if Tint2 installed
+    os.system("which tint2 > ~/tmp")
+    values.tint2_installed = open(values.tmp, 'r').read().rstrip() == "/usr/bin/tint2"
+    os.remove(values.tmp)
+
     if len(sys.argv) <= 2 or sys.argv[1] != "--volume" and sys.argv[1] != "--brightness" and sys.argv[
         1] != "--battery" and sys.argv[1] != "--ac" and sys.argv[1] != "--touchpad" and sys.argv[
         1] != "--autoconfig" and sys.argv[1] != "--screens" and sys.argv[1] != "--alarm":
@@ -57,7 +62,7 @@ def main():
             print(" 1. Commands help")
             if rcmxl_exists:
                 print(" 2. Autoconfig keybindings")
-            if tint2rc_exists:
+            if tint2rc_exists and values.tint2_installed:
                 print(" 3. Autoconfig Tint2")
             print(" 0. Exit")
 
@@ -66,7 +71,7 @@ def main():
                 print_help()
             elif i == "2":
                 autoconfig_keys(True)
-            elif i == "3":
+            elif i == "3" and values.tint2_installed:
                 autoconfig_tint2(True)
             elif i == "0":
                 done = True

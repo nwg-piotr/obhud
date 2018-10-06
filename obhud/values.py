@@ -1,5 +1,5 @@
-ver_string = "0.1.8"
-whatsnew = " *** NEW: Timer/Stopwatch *** Run --autoconfig tint2 to add the executor"
+ver_string = "0.2.1"
+whatsnew = " *** NEW: optional use of light-git (AUR) instead of xbacklight"
 
 screen_dimensions = None
 screen_width = None

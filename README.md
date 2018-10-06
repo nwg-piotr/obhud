@@ -13,7 +13,7 @@ battery state, and also suspend on critical battery level.
 ### New in 0.2.1 version
 
 **Optional use of the [light-git](https://aur.archlinux.org/packages/light-git) (AUR) package**. 
-If brightness keys don't work for you (e.g. with Radeon graphics), please install optional `light-git` package. 
+Listed as an optional dependency. Install if brightness keys don't work for you (e.g. with Radeon graphics). 
 
 ### New in 0.1.9 version
 

@@ -56,12 +56,12 @@ def main():
 
     # Check if the `light` package installed (light-git from AUR)
     os.system("which light > ~/tmp")
-    values.light_installed = open(values.tmp, 'r').read().rstrip() == "/usr/bin/light"
+    values.light_installed = open(values.tmp, 'r').read().rstrip().endswith("/light")
     os.remove(values.tmp)
 
     # Check if Tint2 installed
     os.system("which tint2 > ~/tmp")
-    values.tint2_installed = open(values.tmp, 'r').read().rstrip() == "/usr/bin/tint2"
+    values.tint2_installed = open(values.tmp, 'r').read().rstrip().endswith("/tint2")
     os.remove(values.tmp)
 
     if len(sys.argv) <= 2 or sys.argv[1] != "--volume" and sys.argv[1] != "--brightness" and sys.argv[

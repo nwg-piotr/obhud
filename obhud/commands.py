@@ -234,8 +234,12 @@ def screens(command):
 
 
 def measure_screen():
-    os.system('xrandr | grep \'*\' > ~/tmp')
+    subprocess.call(['xrandr | grep \'=\' > ~/tmp'], shell=True)
     resolution_string = open(values.tmp, 'r').read()
+    # Workaround for possible crash when xrandr won't return "*"
+    if not resolution_string:
+        os.system('xrandr | grep \'+ \' > ~/tmp')
+        resolution_string = open(values.tmp, 'r').read()
     os.remove(values.tmp)
 
     resolution = resolution_string.split()[0]

@@ -10,6 +10,11 @@ Furthermore - assigning a command in [Tint2](https://gitlab.com/o9000/tint2)
 preferences allows to see alerts concerning the AC and
 battery state, and also suspend on critical battery level.
 
+### v0.2.3-1
+
+Temporary file name changed: `~/tmp` -> `~/obhud-tmp` to avoid possible name conflict. 
+Bug reported by [entr0py](https://forum.archlabslinux.com/u/entr0py/summary) - thanks!
+
 ### New in 0.2.1 version
 
 **Optional use of the [light-git](https://aur.archlinux.org/packages/light-git) (AUR) package**. 

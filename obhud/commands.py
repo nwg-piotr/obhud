@@ -27,13 +27,13 @@ import lxml.etree as ET  # depends on python-lxml
 
 import values
 
-volume_get_level = 'amixer sget Master | grep \'Right:\' | awk -F\'[][]\' \'{ print $2 }\' > ~/tmp'
-volume_get_status = 'amixer sget Master | grep \'Right:\' | awk -F\'[][]\' \'{ print $4 }\' > ~/tmp'
+volume_get_level = 'amixer sget Master | grep \'Right:\' | awk -F\'[][]\' \'{ print $2 }\' > ~/obhud-tmp'
+volume_get_status = 'amixer sget Master | grep \'Right:\' | awk -F\'[][]\' \'{ print $4 }\' > ~/obhud-tmp'
 
-brightness_get_level = 'xbacklight -get > ~/tmp'
-light_get_brightness = 'light -G > ~/tmp'
+brightness_get_level = 'xbacklight -get > ~/obhud-tmp'
+light_get_brightness = 'light -G > ~/obhud-tmp'
 
-touchpad_get_status = 'synclient -l | grep TouchpadOff | awk \'{print $3}\' > ~/tmp'
+touchpad_get_status = 'synclient -l | grep TouchpadOff | awk \'{print $3}\' > ~/obhud-tmp'
 
 
 class Hud(Tk):
@@ -234,11 +234,11 @@ def screens(command):
 
 
 def measure_screen():
-    subprocess.call(['xrandr | grep \'*\' > ~/tmp'], shell=True)
+    subprocess.call(['xrandr | grep \'*\' > ~/obhud-tmp'], shell=True)
     resolution_string = open(values.tmp, 'r').read()
     # Workaround for possible crash when xrandr won't return "*"
     if not resolution_string:
-        os.system('xrandr | grep \'+ \' > ~/tmp')
+        os.system('xrandr | grep \'+ \' > ~/obhud-tmp')
         resolution_string = open(values.tmp, 'r').read()
     os.remove(values.tmp)
 
@@ -493,7 +493,7 @@ def save_preferences():
 
 
 def screens_detect(silent):
-    os.system('xrandr | grep \' connected\' > ~/tmp')
+    os.system('xrandr | grep \' connected\' > ~/obhud-tmp')
     screens_string = open(values.tmp, 'r').read()
     os.remove(values.tmp)
 
@@ -511,7 +511,7 @@ def screens_detect(silent):
         values.preferences.screen_secondary = screen1
 
         # find missing resolution and frequency; xrandr may return '*+' or ' +' in appropriate lines!
-        os.system('xrandr | grep -e \'*+\' -e \' +\' > ~/tmp')
+        os.system('xrandr | grep -e \'*+\' -e \' +\' > ~/obhud-tmp')
         resolution_string = open(values.tmp, 'r').read().rstrip()
         os.remove(values.tmp)
 

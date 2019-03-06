@@ -46,7 +46,7 @@ def print_help():
 
 
 def main():
-    values.tmp = os.getenv("HOME") + "/tmp".rstrip()
+    values.tmp = os.getenv("HOME") + "/obhud-tmp".rstrip()
 
     config_load()
 
@@ -55,12 +55,12 @@ def main():
     check_dimensions()
 
     # Check if the `light` package installed (light-git from AUR)
-    os.system("which light > ~/tmp")
+    os.system("which light > ~/obhud-tmp")
     values.light_installed = open(values.tmp, 'r').read().rstrip().endswith("/light")
     os.remove(values.tmp)
 
     # Check if Tint2 installed
-    os.system("which tint2 > ~/tmp")
+    os.system("which tint2 > ~/obhud-tmp")
     values.tint2_installed = open(values.tmp, 'r').read().rstrip().endswith("/tint2")
     os.remove(values.tmp)
 

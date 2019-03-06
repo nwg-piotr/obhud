@@ -73,7 +73,7 @@ class Dialog(Tk):
 
 
 def main():
-    values.tmp = os.getenv("HOME") + "/tmp".rstrip()
+    values.tmp = os.getenv("HOME") + "/obhud-tmp".rstrip()
 
     check_dimensions()
 

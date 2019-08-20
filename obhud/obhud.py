@@ -20,7 +20,7 @@ import subprocess
 
 def main():
     """
-    For simplicity it'll be good to always use commands like `obhud --arg1 arg2`, but we want the timer to run
+    For simplicity it'd be good to always use commands like `obhud --arg1 arg2`, but we want the timer to run
     independently.
     """
     if len(sys.argv) >= 3:
@@ -31,7 +31,7 @@ def main():
             if sys.argv[1] == "--ac" and sys.argv[2] == "connected":
                 subprocess.call(["pkill", "-9", "-f", "python hud.py"])
 
-            subprocess.call(["python", "hud.py", sys.argv[1], sys.argv[2]])
+            subprocess.call(["python", "hud.py"] + sys.argv[1:])
 
         else:
             subprocess.call(["pkill", "-9", "-f", "python timer.py"])

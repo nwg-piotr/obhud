@@ -164,10 +164,27 @@ def touchpad(command):
         os.system(values.touchpad_off)
         show_hud("touchpad-off", "Touchpad off", 1000)
     elif command == "toggle":
-        os.system(touchpad_get_status)
-        touchpad_status = open(values.tmp, 'r').read()
-        touchpad_status = touchpad_status.rstrip()
-        os.remove(values.tmp)
+        touchpad_status = ''
+        # Let's make it work on sway, too. We won't check the touchpad status with Synaptics here!
+        wm = subprocess.check_output("wmctrl -m | awk '/Name/{print $2}'", shell=True).decode("utf-8").strip()
+        if 'LG3D' in wm or 'wlroots' in wm:  # We are on sway!
+            inputs = subprocess.check_output('swaymsg -t get_inputs', shell=True).decode("utf-8").split('\n')
+            touchpad_found = False
+            for line in inputs:
+                if '"type": "touchpad"' in line:
+                    touchpad_found = True
+                if touchpad_found and '"send_events"' in line:
+                    print(line)
+                    if '"enabled"' in line:
+                        touchpad_status = '0'
+                    elif '"disabled"' in line:
+                        touchpad_status = '1'
+                    break
+        else:
+            os.system(touchpad_get_status)
+            touchpad_status = open(values.tmp, 'r').read()
+            touchpad_status = touchpad_status.rstrip()
+            os.remove(values.tmp)
 
         if touchpad_status == "0":
             os.system(values.touchpad_off)
@@ -263,10 +280,10 @@ def check_dimensions():
         values.screen_height - values.hud_side - values.hud_margin_v)
 
 
-def config_load():
+def config_load(file_name):
     config = configparser.ConfigParser()
     try:
-        with open(os.getenv("HOME") + '/.config/obhud/obhud.conf') as f:
+        with open(os.path.join(os.getenv("HOME") + '/.config/obhud/', file_name)) as f:
             config.read_file(f)
             if config.has_section("Commands") \
                     and config.has_option("Commands", "volume_up") \

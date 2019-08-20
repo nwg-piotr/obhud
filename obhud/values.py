@@ -14,8 +14,9 @@ Obhud is distributed in the hope that it will be useful, but WITHOUT ANY WARRANT
 of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 """
 
-ver_string = "0.2.1"
-whatsnew = " *** NEW: optional use of light-git (AUR) instead of xbacklight"
+ver_string = "0.3.0"
+whatsnew = " *NEW: add \'-c filename.conf\' after the command to use alternative config file " \
+           "\n (location: ~/.config/obhud/filename.conf)*"
 
 screen_dimensions = None
 screen_width = None

@@ -48,7 +48,18 @@ def print_help():
 def main():
     values.tmp = os.getenv("HOME") + "/obhud-tmp".rstrip()
 
-    config_load()
+    filename = 'obhud.conf'
+    for i in range(len(sys.argv)):
+        if sys.argv[i].upper() == '-C':
+            try:
+                filename = sys.argv[i + 1]
+                if not os.path.isfile(os.path.join(os.getenv("HOME"), '.config/obhud', filename)):
+                    print('{} file not found'.format(filename))
+                    filename = 'obhud.conf'
+            except Exception as e:
+                print('Alternative config file error: {}'.format(e))
+
+    config_load(filename)
 
     values.preferences_file = os.getenv("HOME") + "/.config/obhud/preferences.pkl"
 

@@ -199,13 +199,13 @@ def touchpad(command):
 def battery(command):
     if command == "low":
         show_hud("battery-low", "Battery low", 10000)
-        os.system('systemctl suspend')
+        # os.system('systemctl suspend')
     elif command == "LOW":
         play_sound("battery-low.mp3")
         show_hud("battery-low", "Battery low", 10000)
-        os.system('systemctl suspend')
+        # os.system('systemctl suspend')
     elif command == "full":
-        show_hud("battery-full", "Battery full", 2000)
+        show_hud("battery-full", "Battery full", 5000)
 
 
 def ac(command):

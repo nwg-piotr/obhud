@@ -17,7 +17,7 @@ Bug reported by [entr0py](https://forum.archlabslinux.com/u/entr0py/summary) - t
 
 ### New in 0.2.1 version
 
-**Optional use of the [light-git](https://aur.archlinux.org/packages/light-git) (AUR) package**. 
+**Optional use of the `light` package**. 
 Listed as an optional dependency. Install if brightness keys don't work for you (e.g. with Radeon graphics).
 See [Wiki](https://github.com/nwg-piotr/obhud/wiki/Openbox-HUD-Wiki) (scroll to the very bottom) 
 for more info. 
